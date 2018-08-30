@@ -11,6 +11,7 @@
 		1A1A160A213870E3002EEE68 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1609213870E3002EEE68 /* BaseController.swift */; };
 		1A1A160F213870E5002EEE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A160E213870E5002EEE68 /* Assets.xcassets */; };
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
+		1A1A161C2138B12E002EEE68 /* PerformanceSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		1A1A160E213870E5002EEE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A1A1611213870E5002EEE68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +54,9 @@
 		1A1A1606213870E3002EEE68 /* feedback */ = {
 			isa = PBXGroup;
 			children = (
-				1A1A161921389311002EEE68 /* Controllers */,
 				1A1A1607213870E3002EEE68 /* AppDelegate.swift */,
-				1A1A160E213870E5002EEE68 /* Assets.xcassets */,
-				1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */,
-				1A1A1613213870E5002EEE68 /* Info.plist */,
+				1A1A161921389311002EEE68 /* Controllers */,
+				1A1A161A2138A33F002EEE68 /* Supporting Files */,
 			);
 			path = feedback;
 			sourceTree = "<group>";
@@ -65,8 +65,19 @@
 			isa = PBXGroup;
 			children = (
 				1A1A1609213870E3002EEE68 /* BaseController.swift */,
+				1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1A1A161A2138A33F002EEE68 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1A1A160E213870E5002EEE68 /* Assets.xcassets */,
+				1A1A1613213870E5002EEE68 /* Info.plist */,
+				1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 			files = (
 				1A1A160A213870E3002EEE68 /* BaseController.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
+				1A1A161C2138B12E002EEE68 /* PerformanceSelectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
