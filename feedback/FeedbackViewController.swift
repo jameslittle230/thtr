@@ -9,16 +9,16 @@
 import UIKit
 
 class FeedbackViewController: UITableViewController {
-    
+
     var productionViewModel: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
-        
+
         navigationItem.title = "Give Feedback"
     }
 }

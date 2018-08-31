@@ -9,9 +9,9 @@
 import UIKit
 
 class PerformanceSelectionController: UITableViewController {
-    
+
     let cellReuseIdentifier = "reuseIdentifier"
-    
+
     let musicals = [
         "Hairspray",
         "Jersey Boys",
@@ -24,7 +24,7 @@ class PerformanceSelectionController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Shows"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        
+
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         }
@@ -48,9 +48,9 @@ class PerformanceSelectionController: UITableViewController {
 
         return cell
     }
-    
+
     // MARK: - Navigation
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feedbackViewController = FeedbackViewController()
         feedbackViewController.productionViewModel = nil
