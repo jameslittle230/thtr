@@ -48,4 +48,13 @@ class PerformanceSelectionController: UITableViewController {
 
         return cell
     }
+    
+    // MARK: - Navigation
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let feedbackViewController = FeedbackViewController()
+        feedbackViewController.productionViewModel = nil
+        navigationController?.pushViewController(feedbackViewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
