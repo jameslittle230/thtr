@@ -7,18 +7,36 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class PerformanceSelectionController: UITableViewController {
 
     let cellReuseIdentifier = "reuseIdentifier"
 
-    let musicals = [
-        "Hairspray",
-        "Jersey Boys",
-        "Spamalot",
-        "The Book of Mormon",
-        "Hamilton"
-    ]
+    var shows: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        let dbRef = Database.database().reference()
+        dbRef.observe(.value) { snapshot in
+            guard let showsDictionary = snapshot.value as? NSDictionary else {
+                return
+            }
+
+            self.shows = ((showsDictionary.allValues as? [String])?.sorted {
+                return $0 > $1
+            })!
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +55,13 @@ class PerformanceSelectionController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return musicals.count
+        return shows.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
 
-        cell.textLabel?.text = musicals[indexPath.row]
+        cell.textLabel?.text = shows[indexPath.row]
         cell.accessoryType = .disclosureIndicator
 
         return cell
