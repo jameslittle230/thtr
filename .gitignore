@@ -81,3 +81,4 @@ DerivedData/
 
 
 # End of https://www.gitignore.io/api/vim,xcode,macos
+/feedback/GoogleService-Info.plist
