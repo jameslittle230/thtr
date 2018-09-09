@@ -29,6 +29,8 @@ class FeedbackViewController: UITableViewController {
 
         navigationItem.title = "Give Feedback"
 
+        tableView.keyboardDismissMode = .onDrag
+
         tableView.register(FeedbackSliderTableViewCell.self, forCellReuseIdentifier: feedbackSliderCellReuseID)
         tableView.register(FeedbackCommentsTableViewCell.self, forCellReuseIdentifier: feedbackCommentsCellReuseID)
     }
@@ -48,6 +50,7 @@ class FeedbackViewController: UITableViewController {
             }
 
             cell.model = feedbackViewModel.sliderValues[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: feedbackCommentsCellReuseID) as? FeedbackCommentsTableViewCell else {
@@ -55,7 +58,12 @@ class FeedbackViewController: UITableViewController {
             }
 
             cell.model = feedbackViewModel.comment
+            cell.selectionStyle = .none
             return cell
         }
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }

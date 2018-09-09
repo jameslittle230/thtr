@@ -52,15 +52,16 @@ class FeedbackSliderTableViewCell: UITableViewCell {
 
         // Layout constraints
         NSLayoutConstraint.activate([
-            slider.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 6),
-            slider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.layoutMargins.left * 3),
+            slider.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            slider.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor, constant: contentView.layoutMargins.left * 3),
             slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -contentView.layoutMargins.right),
             slider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
             ])
 
         NSLayoutConstraint.activate([
             typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.layoutMargins.left * 3)
+            typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.layoutMargins.left * 3),
+            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
             ])
     }
 
