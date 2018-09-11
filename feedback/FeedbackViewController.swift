@@ -12,13 +12,23 @@ class FeedbackViewController: UITableViewController {
 
     let feedbackSliderCellReuseID = "feedbackSliderTableViewCellReuseIdentifier"
     let feedbackCommentsCellReuseID = "feedbackCommentsTableViewCellReuseIdentifier"
+    let feedbackSubmitCellReuseID = "feedbackSubmitTableViewCellReuseIdentifier"
 
-    var productionViewModel: String?
-    var feedbackViewModel: (sliderValues: [FeedbackItemViewModel], comment: String) = ([
-        FeedbackItemViewModel(type: .timeDistortion, value: 0),
-        FeedbackItemViewModel(type: .spaceDistortion, value: 0),
-        FeedbackItemViewModel(type: .bodyDistortion, value: 0)
-    ], "")
+    let displayedCells: [FeedbackTableViewCellType] = [
+        .slider(type: .timeDistortion),
+        .slider(type: .spaceDistortion),
+        .slider(type: .bodyDistortion),
+        .comments,
+        .submit
+    ]
+
+    var show: String? {
+        didSet {
+            feedbackViewModel.show = show ?? ""
+        }
+    }
+
+    var feedbackViewModel = FeedbackViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +43,7 @@ class FeedbackViewController: UITableViewController {
 
         tableView.register(FeedbackSliderTableViewCell.self, forCellReuseIdentifier: feedbackSliderCellReuseID)
         tableView.register(FeedbackCommentsTableViewCell.self, forCellReuseIdentifier: feedbackCommentsCellReuseID)
+        tableView.register(FeedbackSubmitTableViewCell.self, forCellReuseIdentifier: feedbackSubmitCellReuseID)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,30 +51,42 @@ class FeedbackViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return displayedCells.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < feedbackViewModel.sliderValues.count {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: feedbackSliderCellReuseID) as? FeedbackSliderTableViewCell else {
-                fatalError()
-            }
+        var cell: UITableViewCell?
 
-            cell.model = feedbackViewModel.sliderValues[indexPath.row]
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: feedbackCommentsCellReuseID) as? FeedbackCommentsTableViewCell else {
-                fatalError()
-            }
-
-            cell.model = feedbackViewModel.comment
-            cell.selectionStyle = .none
-            return cell
+        switch displayedCells[indexPath.row] {
+        case let .slider(distortionType):
+            let sliderCell = tableView.dequeueReusableCell(withIdentifier: feedbackSliderCellReuseID) as? FeedbackSliderTableViewCell
+            sliderCell?.type = distortionType
+            sliderCell?.model = feedbackViewModel
+            cell = sliderCell
+        case .comments:
+            let commentCell = tableView.dequeueReusableCell(withIdentifier: feedbackCommentsCellReuseID) as? FeedbackCommentsTableViewCell
+            commentCell?.model = feedbackViewModel
+            cell = commentCell
+        case .submit:
+            let submitCell = tableView.dequeueReusableCell(withIdentifier: feedbackSubmitCellReuseID) as? FeedbackSubmitTableViewCell
+            submitCell?.model = feedbackViewModel
+            cell = submitCell
         }
+
+        guard let unwrappedCell = cell else {
+            return UITableViewCell()
+        }
+
+        return unwrappedCell
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+}
+
+enum FeedbackTableViewCellType {
+    case slider(type: FeedbackDimension)
+    case comments
+    case submit
 }

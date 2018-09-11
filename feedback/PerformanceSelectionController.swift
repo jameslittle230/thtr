@@ -22,14 +22,14 @@ class PerformanceSelectionController: UITableViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        let dbRef = Database.database().reference()
+        let dbRef = Database.database().reference().child("shows")
         dbRef.observe(.value) { snapshot in
             guard let showsDictionary = snapshot.value as? NSDictionary else {
                 return
             }
 
             self.shows = ((showsDictionary.allValues as? [String])?.sorted {
-                return $0 > $1
+                return $1 > $0
             })!
         }
     }
@@ -71,7 +71,7 @@ class PerformanceSelectionController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feedbackViewController = FeedbackViewController()
-        feedbackViewController.productionViewModel = nil
+        feedbackViewController.show = shows[indexPath.row]
         navigationController?.pushViewController(feedbackViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

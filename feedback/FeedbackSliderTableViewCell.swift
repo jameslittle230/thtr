@@ -12,14 +12,16 @@ class FeedbackSliderTableViewCell: UITableViewCell {
     let slider = UISlider()
     let typeLabel = UILabel()
 
-    var model: FeedbackItemViewModel? {
+    var model: FeedbackViewModel?
+
+    var type: FeedbackDimension? {
         didSet {
-            guard let model = model else {
+            guard type != nil else {
                 return
             }
 
-            let label = { () -> String in
-                switch model.type {
+            typeLabel.text = { () -> String in
+                switch type! {
                 case .bodyDistortion:
                     return "Bodies"
                 case .spaceDistortion:
@@ -28,8 +30,6 @@ class FeedbackSliderTableViewCell: UITableViewCell {
                     return "Time"
                 }
             }()
-
-            typeLabel.text = label
         }
     }
 
@@ -67,11 +67,11 @@ class FeedbackSliderTableViewCell: UITableViewCell {
 
     @objc
     func sliderValueDidChange(sender: UISlider) {
-        guard model != nil else {
+        guard model != nil, type != nil else {
             return
         }
 
-        model!.value = sender.value
+        model!.dimensions[type!] = sender.value
     }
 
     required init?(coder aDecoder: NSCoder) {

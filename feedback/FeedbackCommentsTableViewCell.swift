@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FeedbackCommentsTableViewCell: UITableViewCell {
+class FeedbackCommentsTableViewCell: UITableViewCell, UITextViewDelegate {
     let textInput = UITextView()
     let typeLabel = UILabel()
 
-    var model: String = ""
+    var model: FeedbackViewModel?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,8 +23,9 @@ class FeedbackCommentsTableViewCell: UITableViewCell {
 
         textInput.isUserInteractionEnabled = true
         textInput.isEditable = true
-        textInput.text = "asdfasdf"
+        textInput.text = "..."
         textInput.font = UIFont.preferredFont(forTextStyle: .body)
+        textInput.delegate = self
 
         // Title setup
         contentView.addSubview(typeLabel)
@@ -46,9 +47,8 @@ class FeedbackCommentsTableViewCell: UITableViewCell {
             ])
     }
 
-    @objc
-    func inputValueDidChange(sender: UITextField) {
-        model = sender.text ?? ""
+    func textViewDidChange(_ textView: UITextView) {
+        model?.comments = textView.text
     }
 
     required init?(coder aDecoder: NSCoder) {
