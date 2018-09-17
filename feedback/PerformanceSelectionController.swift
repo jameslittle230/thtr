@@ -1,5 +1,5 @@
 //
-//  PerformanceSelectionControllerTableViewController.swift
+//  PerformanceSelectionController.swift
 //  feedback
 //
 //  Created by James Little on 8/30/18.
@@ -43,6 +43,14 @@ class PerformanceSelectionController: UITableViewController {
         navigationItem.title = "Shows"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
 
+        let profileButton = UIBarButtonItem(
+            barButtonSystemItem: .bookmarks,
+            target: self,
+            action: #selector(sayHello(sender:))
+        )
+
+        navigationItem.rightBarButtonItem = profileButton
+
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         }
@@ -78,5 +86,11 @@ class PerformanceSelectionController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+
+    @objc
+    func sayHello(sender: UIBarButtonItem) {
+        print("got here")
+        present(AccountViewController(), animated: true, completion: nil)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseController: UINavigationController {
+class RootController: UINavigationController {
 
     init() {
         let performanceSelectionController = PerformanceSelectionController()
