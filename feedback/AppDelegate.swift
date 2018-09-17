@@ -17,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootController = RootController()
-        window!.rootViewController = rootController
+
+        let performanceSelectionVC = PerformanceSelectionController()
+        let rootVC = RootController(rootViewController: performanceSelectionVC)
+        window!.rootViewController = rootVC
         window!.makeKeyAndVisible()
         return true
     }

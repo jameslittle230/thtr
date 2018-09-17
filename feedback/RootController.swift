@@ -10,9 +10,8 @@ import UIKit
 
 class RootController: UINavigationController {
 
-    init() {
-        let performanceSelectionController = PerformanceSelectionController()
-        super.init(rootViewController: performanceSelectionController)
+    override init(rootViewController rootVC: UIViewController) {
+        super.init(rootViewController: rootVC)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -21,9 +20,5 @@ class RootController: UINavigationController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }

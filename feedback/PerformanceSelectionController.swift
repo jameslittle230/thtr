@@ -20,6 +20,12 @@ class PerformanceSelectionController: UITableViewController {
         }
     }
 
+    lazy var profileButton = UIBarButtonItem(
+        barButtonSystemItem: .bookmarks,
+        target: self,
+        action: #selector(displayAccountViewController(sender:))
+    )
+
     init() {
         super.init(nibName: nil, bundle: nil)
         let dbRef = Database.database().reference().child("shows")
@@ -42,12 +48,6 @@ class PerformanceSelectionController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Shows"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-
-        let profileButton = UIBarButtonItem(
-            barButtonSystemItem: .bookmarks,
-            target: self,
-            action: #selector(sayHello(sender:))
-        )
 
         navigationItem.rightBarButtonItem = profileButton
 
@@ -89,8 +89,9 @@ class PerformanceSelectionController: UITableViewController {
     }
 
     @objc
-    func sayHello(sender: UIBarButtonItem) {
-        print("got here")
-        present(AccountViewController(), animated: true, completion: nil)
+    func displayAccountViewController(sender: UIBarButtonItem) {
+        let accountVC = AccountViewController()
+        let popoverRootVC = RootController(rootViewController: accountVC)
+        present(popoverRootVC, animated: true, completion: nil)
     }
 }
