@@ -8,5 +8,6 @@ target 'feedback' do
   # Pods for feedback
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 
 end
