@@ -11,7 +11,6 @@
 		1A170C19213F0BCF00C014B3 /* FeedbackSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A170C18213F0BCF00C014B3 /* FeedbackSliderTableViewCell.swift */; };
 		1A170C1C213F0BFF00C014B3 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A170C1B213F0BFF00C014B3 /* FeedbackViewModel.swift */; };
 		1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1607213870E3002EEE68 /* AppDelegate.swift */; };
-		1A1A160A213870E3002EEE68 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1609213870E3002EEE68 /* RootController.swift */; };
 		1A1A160F213870E5002EEE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A160E213870E5002EEE68 /* Assets.xcassets */; };
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* PerformanceSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */; };
@@ -19,6 +18,10 @@
 		1AA8107621457EAB00D395E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */; };
 		1AB1658F214814BE00F273E7 /* FeedbackSubmitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1658E214814BE00F273E7 /* FeedbackSubmitTableViewCell.swift */; };
 		1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB16593214FF7FD00F273E7 /* AccountViewController.swift */; };
+		1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* SignInViewController.swift */; };
+		1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165992150675300F273E7 /* UIKit+Autolayout.swift */; };
+		1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659C215084E200F273E7 /* SignUpViewController.swift */; };
+		1AB1659F2150850D00F273E7 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659E2150850D00F273E7 /* Create.swift */; };
 		CFECFBD2B16A189ADF22B39B /* Pods_feedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +31,6 @@
 		1A170C1B213F0BFF00C014B3 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
 		1A1A1604213870E3002EEE68 /* feedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = feedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1A1607213870E3002EEE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A1A1609213870E3002EEE68 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		1A1A160E213870E5002EEE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A1A1611213870E5002EEE68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +39,10 @@
 		1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AB1658E214814BE00F273E7 /* FeedbackSubmitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmitTableViewCell.swift; sourceTree = "<group>"; };
 		1AB16593214FF7FD00F273E7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		1AB165962150649E00F273E7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1AB165992150675300F273E7 /* UIKit+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Autolayout.swift"; sourceTree = "<group>"; };
+		1AB1659C215084E200F273E7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1AB1659E2150850D00F273E7 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E697ED1D9D93D0ACE5FA1AA /* Pods-feedback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedback.release.xcconfig"; path = "Pods/Target Support Files/Pods-feedback/Pods-feedback.release.xcconfig"; sourceTree = "<group>"; };
 		C2C698CD4FE699B59DA200BE /* Pods-feedback.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedback.debug.xcconfig"; path = "Pods/Target Support Files/Pods-feedback/Pods-feedback.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 			children = (
 				1A1A1607213870E3002EEE68 /* AppDelegate.swift */,
 				1A1A161921389311002EEE68 /* Controllers */,
+				1AB165982150674600F273E7 /* Extensions */,
 				1A1A161A2138A33F002EEE68 /* Supporting Files */,
 				1A170C15213F0B8600C014B3 /* Table View Cells */,
 				1A170C1A213F0BEF00C014B3 /* View Models */,
@@ -105,10 +112,10 @@
 		1A1A161921389311002EEE68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1AB165952150643B00F273E7 /* Account VCs */,
 				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
 				1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */,
-				1A1A1609213870E3002EEE68 /* RootController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -122,6 +129,24 @@
 				1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AB165952150643B00F273E7 /* Account VCs */ = {
+			isa = PBXGroup;
+			children = (
+				1AB165962150649E00F273E7 /* SignInViewController.swift */,
+				1AB1659C215084E200F273E7 /* SignUpViewController.swift */,
+			);
+			name = "Account VCs";
+			sourceTree = "<group>";
+		};
+		1AB165982150674600F273E7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1AB165992150675300F273E7 /* UIKit+Autolayout.swift */,
+				1AB1659E2150850D00F273E7 /* Create.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		66F057E5198F1FC2AAFFDDC2 /* Pods */ = {
@@ -259,6 +284,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-feedback/Pods-feedback-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -267,6 +293,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -283,13 +310,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
 				1AB1658F214814BE00F273E7 /* FeedbackSubmitTableViewCell.swift in Sources */,
 				1A170C1C213F0BFF00C014B3 /* FeedbackViewModel.swift in Sources */,
-				1A1A160A213870E3002EEE68 /* RootController.swift in Sources */,
+				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
 				1A170C19213F0BCF00C014B3 /* FeedbackSliderTableViewCell.swift in Sources */,
 				1A170C17213F0BA900C014B3 /* FeedbackCommentsTableViewCell.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
+				1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
+				1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */,
 				1A1A161C2138B12E002EEE68 /* PerformanceSelectionController.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
 			);

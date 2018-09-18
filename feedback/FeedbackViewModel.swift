@@ -28,7 +28,14 @@ class FeedbackViewModel {
     var comments = ""
     var show = ""
 
-    func write(withCompletionBlock completionBlock: @escaping ((Error?, Bool, DataSnapshot?) -> Void)) {
+    func write(withCompletionBlock completionBlock: @escaping (() -> Void)) {
+        guard let user = Auth.auth().currentUser else {
+            let alert = UIAlertController(title: "Error", message: "Gotta be logged in!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "sorry", style: .default, handler: nil))
+            (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.topViewController?.present(alert, animated: true, completion: nil)
+            return
+        }
+
         let timestamp = String(Int(floor(Date().timeIntervalSince1970 * 1000)))
         var dbRef = Database.database().reference()
         dbRef = dbRef.child("feedback_entries").child(timestamp)
@@ -38,5 +45,8 @@ class FeedbackViewModel {
         dbRef.child("space").setValue(dimensions[.spaceDistortion])
         dbRef.child("body").setValue(dimensions[.bodyDistortion])
         dbRef.child("comments").setValue(comments)
+        dbRef.child("user_id").setValue(user.uid)
+
+        completionBlock()
     }
 }

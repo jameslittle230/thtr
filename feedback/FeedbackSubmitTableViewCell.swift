@@ -39,11 +39,8 @@ class FeedbackSubmitTableViewCell: UITableViewCell {
 
     @objc
     func didSelectButton() {
-        button.isEnabled = false
-        model?.write { error, committed, data in
-            if error == nil {
-//                UIAlertController(title: "Data Transaction Failed", message: ":(", preferredStyle: .alert).show(, sender: nil)
-            }
+        model?.write {
+            // nothing
         }
     }
 }

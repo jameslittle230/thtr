@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         let performanceSelectionVC = PerformanceSelectionController()
-        let rootVC = RootController(rootViewController: performanceSelectionVC)
+        let rootVC = UINavigationController(rootViewController: performanceSelectionVC)
         window!.rootViewController = rootVC
         window!.makeKeyAndVisible()
         return true

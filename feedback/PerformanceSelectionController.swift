@@ -26,6 +26,8 @@ class PerformanceSelectionController: UITableViewController {
         action: #selector(displayAccountViewController(sender:))
     )
 
+    // MARK: - Initialization
+
     init() {
         super.init(nibName: nil, bundle: nil)
         let dbRef = Database.database().reference().child("shows")
@@ -56,7 +58,7 @@ class PerformanceSelectionController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -91,7 +93,7 @@ class PerformanceSelectionController: UITableViewController {
     @objc
     func displayAccountViewController(sender: UIBarButtonItem) {
         let accountVC = AccountViewController()
-        let popoverRootVC = RootController(rootViewController: accountVC)
+        let popoverRootVC = UINavigationController(rootViewController: accountVC)
         present(popoverRootVC, animated: true, completion: nil)
     }
 }

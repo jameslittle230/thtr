@@ -10,37 +10,79 @@ import UIKit
 
 class AccountViewController: UITableViewController {
 
+    enum CellTypes {
+        case signUp
+        case signIn
+        case changePassword
+        case signOut
+    }
+
+    var visibleCells = [
+        CellTypes.signIn,
+        CellTypes.signUp
+    ]
+
+    let cellReuseId = "reuseIdentifier"
+
+    lazy var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectDoneButton))
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.rightBarButtonItem = doneButton
+        self.navigationItem.title = "Account"
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return visibleCells.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
 
-        // Configure the cell...
+        let cellType = visibleCells[indexPath.row]
+
+        switch cellType {
+        case .changePassword:
+            cell.textLabel?.text = "Change Password"
+        case .signIn:
+            cell.textLabel?.text = "Sign In"
+        case .signUp:
+            cell.textLabel?.text = "Sign Up"
+        case .signOut:
+            cell.textLabel?.text = "Sign Out"
+        }
+
+        cell.accessoryType = .disclosureIndicator
 
         return cell
     }
-    */
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellType = visibleCells[indexPath.row]
+
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        switch cellType {
+        case .changePassword:
+//            present(SignInViewController(), animated: true, completion: nil)
+            return
+        case .signIn:
+            navigationController?.pushViewController(SignInViewController(), animated: true)
+        case .signUp:
+            navigationController?.pushViewController(SignUpViewController(), animated: true)
+        case .signOut:
+            return
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,5 +128,10 @@ class AccountViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    @objc
+    func didSelectDoneButton() {
+        dismiss(animated: true, completion: nil)
+    }
 
 }
