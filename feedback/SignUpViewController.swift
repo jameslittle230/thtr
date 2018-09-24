@@ -14,6 +14,9 @@ class SignUpViewController: UITableViewController {
     let emailInput: UITextField = create {
         $0.placeholder = "james@example.com"
         $0.textAlignment = .right
+        $0.autocapitalizationType = .none
+        $0.keyboardType = .emailAddress
+        $0.autocorrectionType = .no
     }
 
     let emailLabel: UILabel = create {
@@ -26,6 +29,8 @@ class SignUpViewController: UITableViewController {
         $0.placeholder = "Password"
         $0.textAlignment = .right
         $0.isSecureTextEntry = true
+        $0.autocorrectionType = .no
+        $0.autocapitalizationType = .none
     }
 
     let passwordLabel: UILabel = create {
@@ -68,6 +73,8 @@ class SignUpViewController: UITableViewController {
         navigationItem.title = "Sign Up"
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+
+        emailInput.becomeFirstResponder()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
