@@ -129,7 +129,20 @@ class SignUpViewController: UITableViewController {
         }
 
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-            guard authResult?.user != nil else { fatalError() }
+            guard error == nil else {
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+
+            guard authResult?.user != nil else {
+                let alert = UIAlertController(title: "Error", message: "User could not be created.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Bummer.", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+
             self.navigationController?.popViewController(animated: true)
         }
     }
