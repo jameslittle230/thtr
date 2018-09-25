@@ -13,20 +13,22 @@ class FeedbackViewController: UIViewController {
     let stackView: UIStackView = create {
         $0.backgroundColor = .red
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
     }
 
-    var innerViewBottomConstraint = NSLayoutConstraint()
+    lazy var innerViewBottomConstraint = NSLayoutConstraint()
 
     let mainInput: UITextView = create {
         $0.backgroundColor = UIColor.lightGray
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
-    let optionsCollectionView: UICollectionView = create {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    let collectionView = FeedbackCollectionView()
+
+    var keyboardVisible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +41,8 @@ class FeedbackViewController: UIViewController {
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
+        stackView.addArrangedSubview(collectionView)
         view.backgroundColor = .white
-
 
         if #available(iOS 11.0, *) {
             innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -51,23 +53,41 @@ class FeedbackViewController: UIViewController {
                 stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
                 innerViewBottomConstraint
                 ])
-
-            mainInput.anchorToSuperviewAnchors()
         } else {
             // Fallback on earlier versions
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        collectionView.viewController = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if !keyboardVisible {
+            mainInput.becomeFirstResponder()
+        }
     }
 
     @objc
-    func keyboardDidAppear(_ sender: NSNotification) {
+    func keyboardWillAppear(_ sender: NSNotification) {
+        guard keyboardVisible == false else {
+            return
+        }
+        
+        keyboardVisible = true
+
         guard let info = sender.userInfo as? [String: AnyObject],
-            let kbSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size else {
+            let kbSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {
                 return
         }
 
-        innerViewBottomConstraint.constant = -kbSize.height
+        print(kbSize)
+
+        innerViewBottomConstraint.isActive = false
+        innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -kbSize.height)
+        innerViewBottomConstraint.isActive = true
 
         UIView.animate(withDuration: 1.0, animations: {
             self.view.layoutIfNeeded()

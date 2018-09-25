@@ -13,6 +13,8 @@
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* PerformanceSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */; };
 		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
+		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
+		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1AA8107621457EAB00D395E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */; };
 		1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB16593214FF7FD00F273E7 /* AccountViewController.swift */; };
 		1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* SignInViewController.swift */; };
@@ -31,6 +33,8 @@
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSelectionController.swift; sourceTree = "<group>"; };
 		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
+		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AB16593214FF7FD00F273E7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		1AB165962150649E00F273E7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 				1AB165982150674600F273E7 /* Extensions */,
 				1A1A161A2138A33F002EEE68 /* Supporting Files */,
 				1A170C1A213F0BEF00C014B3 /* View Models */,
+				1A3950262159B87100D0BD7D /* Views */,
 			);
 			path = feedback;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
 				1A1A161B2138B12E002EEE68 /* PerformanceSelectionController.swift */,
+				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -112,6 +118,14 @@
 				1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A3950262159B87100D0BD7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		1AB165952150643B00F273E7 /* Account VCs */ = {
@@ -293,9 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
 				1A170C1C213F0BFF00C014B3 /* FeedbackViewModel.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
+				1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
 				1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
