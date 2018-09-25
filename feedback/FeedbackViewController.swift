@@ -8,27 +8,25 @@
 
 import UIKit
 
-class FeedbackViewController: UITableViewController {
+class FeedbackViewController: UIViewController {
 
-    let feedbackSliderCellReuseID = "feedbackSliderTableViewCellReuseIdentifier"
-    let feedbackCommentsCellReuseID = "feedbackCommentsTableViewCellReuseIdentifier"
-    let feedbackSubmitCellReuseID = "feedbackSubmitTableViewCellReuseIdentifier"
-
-    let displayedCells: [FeedbackTableViewCellType] = [
-        .slider(type: .timeDistortion),
-        .slider(type: .spaceDistortion),
-        .slider(type: .bodyDistortion),
-        .comments,
-        .submit
-    ]
-
-    var show: String? {
-        didSet {
-            feedbackViewModel.show = show ?? ""
-        }
+    let stackView: UIStackView = create {
+        $0.backgroundColor = .red
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var feedbackViewModel = FeedbackViewModel()
+    var innerViewBottomConstraint = NSLayoutConstraint()
+
+    let mainInput: UITextView = create {
+        $0.backgroundColor = UIColor.lightGray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isEditable = true
+        $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    }
+
+    let optionsCollectionView: UICollectionView = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,54 +37,40 @@ class FeedbackViewController: UITableViewController {
 
         navigationItem.title = "Give Feedback"
 
-        tableView.keyboardDismissMode = .onDrag
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(mainInput)
+        view.backgroundColor = .white
 
-        tableView.register(FeedbackSliderTableViewCell.self, forCellReuseIdentifier: feedbackSliderCellReuseID)
-        tableView.register(FeedbackCommentsTableViewCell.self, forCellReuseIdentifier: feedbackCommentsCellReuseID)
-        tableView.register(FeedbackSubmitTableViewCell.self, forCellReuseIdentifier: feedbackSubmitCellReuseID)
-    }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+        if #available(iOS 11.0, *) {
+            innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayedCells.count
-    }
+            NSLayoutConstraint.activate([
+                stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                innerViewBottomConstraint
+                ])
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell?
-
-        switch displayedCells[indexPath.row] {
-        case let .slider(distortionType):
-            let sliderCell = tableView.dequeueReusableCell(withIdentifier: feedbackSliderCellReuseID) as? FeedbackSliderTableViewCell
-            sliderCell?.type = distortionType
-            sliderCell?.model = feedbackViewModel
-            cell = sliderCell
-        case .comments:
-            let commentCell = tableView.dequeueReusableCell(withIdentifier: feedbackCommentsCellReuseID) as? FeedbackCommentsTableViewCell
-            commentCell?.model = feedbackViewModel
-            cell = commentCell
-        case .submit:
-            let submitCell = tableView.dequeueReusableCell(withIdentifier: feedbackSubmitCellReuseID) as? FeedbackSubmitTableViewCell
-            submitCell?.model = feedbackViewModel
-            cell = submitCell
+            mainInput.anchorToSuperviewAnchors()
+        } else {
+            // Fallback on earlier versions
         }
 
-        guard let unwrappedCell = cell else {
-            return UITableViewCell()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    @objc
+    func keyboardDidAppear(_ sender: NSNotification) {
+        guard let info = sender.userInfo as? [String: AnyObject],
+            let kbSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size else {
+                return
         }
 
-        return unwrappedCell
-    }
+        innerViewBottomConstraint.constant = -kbSize.height
 
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        UIView.animate(withDuration: 1.0, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
-}
-
-enum FeedbackTableViewCellType {
-    case slider(type: FeedbackDimension)
-    case comments
-    case submit
 }

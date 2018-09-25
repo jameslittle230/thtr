@@ -81,7 +81,6 @@ class PerformanceSelectionController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feedbackViewController = FeedbackViewController()
-        feedbackViewController.show = shows[indexPath.row]
         navigationController?.pushViewController(feedbackViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
