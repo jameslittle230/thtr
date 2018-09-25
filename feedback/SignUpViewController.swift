@@ -73,7 +73,10 @@ class SignUpViewController: UITableViewController {
         navigationItem.title = "Sign Up"
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         emailInput.becomeFirstResponder()
     }
 
@@ -136,12 +139,16 @@ class SignUpViewController: UITableViewController {
                 return
             }
 
-            guard authResult?.user != nil else {
+            guard let user = authResult?.user else {
                 let alert = UIAlertController(title: "Error", message: "User could not be created.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Bummer.", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 return
             }
+
+            NotificationCenter.default.post(
+                Notification(name: Notification.Name(rawValue: "UserSetNotification"),
+                             object: user, userInfo: nil))
 
             self.navigationController?.popViewController(animated: true)
         }

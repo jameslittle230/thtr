@@ -75,6 +75,11 @@ class SignInViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailInput.becomeFirstResponder()
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -134,7 +139,18 @@ class SignInViewController: UITableViewController {
                 return
             }
 
-            print(user)
+            guard let user = user else {
+                let alert = UIAlertController(title: "Error", message: "User is nil, but error is not! What's the deal?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+
+            NotificationCenter.default.post(
+                Notification(name: Notification.Name(rawValue: "UserSetNotification"),
+                             object: user, userInfo: nil))
+
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
