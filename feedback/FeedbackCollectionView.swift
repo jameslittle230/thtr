@@ -57,10 +57,10 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = viewController else {
+        guard let vctrl = viewController else {
             return
         }
 
-        vc.navigationController?.pushViewController(ExampleViewController(), animated: true)
+        vctrl.navigationController?.pushViewController(ExampleViewController(), animated: true)
     }
 }

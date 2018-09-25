@@ -19,7 +19,6 @@ class FeedbackViewController: UIViewController {
     lazy var innerViewBottomConstraint = NSLayoutConstraint()
 
     let mainInput: UITextView = create {
-        $0.backgroundColor = UIColor.lightGray
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
@@ -59,7 +58,8 @@ class FeedbackViewController: UIViewController {
 
         collectionView.viewController = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
