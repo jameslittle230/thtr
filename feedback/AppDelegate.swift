@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let performanceSelectionVC = PerformanceSelectionController()
-        let rootVC = UINavigationController(rootViewController: performanceSelectionVC)
+        let reviewFeedVC = ReviewFeedController()
+        let rootVC = UINavigationController(rootViewController: reviewFeedVC)
         window!.rootViewController = rootVC
         window!.makeKeyAndVisible()
         return true

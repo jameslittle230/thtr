@@ -20,14 +20,14 @@ extension UIView {
     @discardableResult
     func anchorToSuperviewAnchors(withInsetSize size: CGFloat)
         -> (NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint) {
-            let insets = UIEdgeInsets(top: size, left: size, bottom: -size, right: -size)
+            let insets = UIEdgeInsets(top: size, left: size, bottom: size, right: size)
             return self.anchorToSuperviewAnchors(withInsets: insets)
     }
 
     @discardableResult
     func anchorToSuperviewAnchors(withHorizontalInset horiz: CGFloat, andVerticalInset vert: CGFloat)
         -> (NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint) {
-            let insets = UIEdgeInsets(top: vert, left: horiz, bottom: -horiz, right: -vert)
+            let insets = UIEdgeInsets(top: vert, left: horiz, bottom: vert, right: horiz)
             return self.anchorToSuperviewAnchors(withInsets: insets)
     }
 
