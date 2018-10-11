@@ -22,6 +22,7 @@ class FeedbackViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        $0.textColor = .white
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
@@ -38,6 +39,7 @@ class FeedbackViewController: UIViewController {
 
         navigationItem.title = "Give Feedback"
 
+        view.backgroundColor = UIColor(hex: "#072028")
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
         stackView.addArrangedSubview(collectionView)
@@ -75,7 +77,7 @@ class FeedbackViewController: UIViewController {
         guard keyboardVisible == false else {
             return
         }
-        
+
         keyboardVisible = true
 
         guard let info = sender.userInfo as? [String: AnyObject],

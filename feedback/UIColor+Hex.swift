@@ -18,10 +18,12 @@ extension UIColor {
         var rgb: UInt32 = 0
         scanner.scanHexInt32(&rgb)
 
+        // swiftlint:disable colon
         self.init(
             red:   CGFloat((rgb & 0xFF0000) >> 16)/255.0,
             green: CGFloat((rgb &   0xFF00) >>  8)/255.0,
             blue:  CGFloat((rgb &     0xFF)      )/255.0,
             alpha: alpha)
+        // swiftlint:enable colon
     }
 }

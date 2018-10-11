@@ -12,12 +12,13 @@ class ReviewFeedCell: UITableViewCell {
 
     let insetContentView: UIView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
         $0.layer.cornerRadius = 8
+        $0.layer.borderColor = UIColor(hex: "#c5e1ea").cgColor
+        $0.layer.borderWidth = (1.0 / UIScreen.main.scale) / 2
 
         // Shadow
         $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.3
+        $0.layer.shadowOpacity = 0.8
         $0.layer.shadowRadius = 4.0
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
@@ -30,6 +31,7 @@ class ReviewFeedCell: UITableViewCell {
     let contentLabel: UILabel = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 8
+        $0.font = UIFont.preferredFont(forTextStyle: .body)
         $0.textColor = .white
     }
 
@@ -60,9 +62,9 @@ class ReviewFeedCell: UITableViewCell {
 
     func configureAsNewReviewCell() {
         contentLabel.text = "New Review..."
-        contentLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        contentLabel.font = UIFont.systemFont(ofSize: 24, weight: .black)
 
-        insetCVGradient.colors = [UIColor.init(hex: "#FC466B").cgColor, UIColor.init(hex: "#3F5EFB").cgColor]
+        insetCVGradient.colors = [UIColor.init(hex: "#cc5333").cgColor, UIColor.init(hex: "#23074d").cgColor]
     }
 
     func configureWithReview(_ review: Review) {

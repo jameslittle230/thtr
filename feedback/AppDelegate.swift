@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
 
+        Themer.configure()
+
         let reviewFeedVC = ReviewFeedController()
         let rootVC = UINavigationController(rootViewController: reviewFeedVC)
         window!.rootViewController = rootVC

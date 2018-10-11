@@ -18,6 +18,7 @@
 		1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */; };
 		1A6786772163EFB700E7A79C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786762163EFB700E7A79C /* Review.swift */; };
 		1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */; };
+		1A830248216FCBC9001EEF7A /* Themer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830247216FCBC9001EEF7A /* Themer.swift */; };
 		1AA8107621457EAB00D395E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */; };
 		1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB16593214FF7FD00F273E7 /* AccountViewController.swift */; };
 		1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* SignInViewController.swift */; };
@@ -41,6 +42,7 @@
 		1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedCell.swift; sourceTree = "<group>"; };
 		1A6786762163EFB700E7A79C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		1A830247216FCBC9001EEF7A /* Themer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themer.swift; sourceTree = "<group>"; };
 		1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AB16593214FF7FD00F273E7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		1AB165962150649E00F273E7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				1A1A161A2138A33F002EEE68 /* Supporting Files */,
 				1A170C1A213F0BEF00C014B3 /* View Models */,
 				1A3950262159B87100D0BD7D /* Views */,
+				1A830247216FCBC9001EEF7A /* Themer.swift */,
 			);
 			path = feedback;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */,
 				1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */,
 				1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */,
+				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
