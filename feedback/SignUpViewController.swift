@@ -12,7 +12,7 @@ import Firebase
 class SignUpViewController: UITableViewController {
 
     let emailInput: UITextField = create {
-        $0.placeholder = "james@example.com"
+        $0.attributedPlaceholder = NSAttributedString(string: "james@example.com", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
         $0.textAlignment = .right
         $0.autocapitalizationType = .none
         $0.keyboardType = .emailAddress
@@ -26,17 +26,19 @@ class SignUpViewController: UITableViewController {
     }
 
     let passwordInput: UITextField = create {
-        $0.placeholder = "Password"
+        $0.attributedPlaceholder = NSAttributedString(string: "••••••••", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
         $0.textAlignment = .right
         $0.isSecureTextEntry = true
         $0.autocorrectionType = .no
         $0.autocapitalizationType = .none
     }
 
-    let passwordLabel: UILabel = create {
-        $0.text = "Password"
-        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+    let passwordConfirmInput: UITextField = create {
+        $0.attributedPlaceholder = NSAttributedString(string: "••••••••", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
+        $0.textAlignment = .right
+        $0.isSecureTextEntry = true
+        $0.autocorrectionType = .no
+        $0.autocapitalizationType = .none
     }
 
     let emailField: UIStackView = create {
@@ -45,7 +47,25 @@ class SignUpViewController: UITableViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    let passwordLabel: UILabel = create {
+        $0.text = "Password"
+        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let passwordConfirmLabel: UILabel = create {
+        $0.text = "Confirm Password"
+        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     let passwordField: UIStackView = create {
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let passwordConfirmField: UIStackView = create {
         $0.axis = .horizontal
         $0.spacing = 8
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -64,11 +84,14 @@ class SignUpViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        emailField.addArrangedSubview(emailLabel)
+        emailField.addArrangedSubview(emailInput)
+
         passwordField.addArrangedSubview(passwordLabel)
         passwordField.addArrangedSubview(passwordInput)
 
-        emailField.addArrangedSubview(emailLabel)
-        emailField.addArrangedSubview(emailInput)
+        passwordConfirmField.addArrangedSubview(passwordConfirmLabel)
+        passwordConfirmField.addArrangedSubview(passwordConfirmInput)
 
         navigationItem.title = "Sign Up"
 
@@ -87,7 +110,7 @@ class SignUpViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,9 +124,10 @@ class SignUpViewController: UITableViewController {
         case 1:
             subview = passwordField
         case 2:
+            subview = passwordConfirmField
+        case 3:
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Sign Up"
-            cell.textLabel?.textColor = self.view.tintColor
             subview = nil
         default:
             fatalError("That's not how math works")
@@ -125,11 +149,24 @@ class SignUpViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard indexPath.row == 2 else {
+        guard indexPath.row == 3 else {
             return
         }
 
-        guard let email = emailInput.text, let password = passwordInput.text else {
+        guard let email = emailInput.text,
+            let password = passwordInput.text,
+            let passwordConf = passwordConfirmInput.text else {
+            return
+        }
+
+        guard password == passwordConf else {
+            let alert = UIAlertController(title: "Passwords must match.", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                self.passwordInput.text = ""
+                self.passwordConfirmInput.text = ""
+                self.passwordInput.becomeFirstResponder()
+            })
+            self.present(alert, animated: true, completion: nil)
             return
         }
 
