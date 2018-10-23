@@ -85,7 +85,18 @@ class AccountViewController: UITableViewController {
 
         switch cellType {
         case .changePassword:
-//            present(SignInViewController(), animated: true, completion: nil)
+            guard let email = Auth.auth().currentUser?.email else {
+                return
+            }
+
+            let successMessage = NSLocalizedString("You will get an email with a link that will let you change your password. You will also be signed out.", comment: "Change Password Success Message")
+            let alert = UIAlertController(title: "Error", message: successMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                Auth.auth().sendPasswordReset(withEmail: email, completion: self.didSendPasswordReset)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
             return
         case .signIn:
             navigationController?.pushViewController(SignInViewController(), animated: true)
@@ -98,7 +109,21 @@ class AccountViewController: UITableViewController {
 
     @objc
     func didSelectDoneButton() {
-        dismiss(animated: true, completion: nil)
+        if Auth.auth().currentUser != nil {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func didSendPasswordReset(_ error: Error?) {
+        if error != nil {
+            let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        signOut()
+        return
     }
 
     @objc
