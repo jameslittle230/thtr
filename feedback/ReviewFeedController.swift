@@ -29,14 +29,16 @@ class ReviewFeedController: UITableViewController {
         tableView.separatorStyle = .none
 
         navigationItem.rightBarButtonItem = profileButton
-
-        loadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser == nil {
+            self.reviews = []
+            tableView.reloadData()
             displayAccountViewController(sender: nil)
+        } else {
+            loadData()
         }
     }
 
@@ -64,11 +66,16 @@ class ReviewFeedController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviews.count + 1
+        switch section {
+        case 0:
+            return 1
+        default:
+            return reviews.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,11 +84,11 @@ class ReviewFeedController: UITableViewController {
             return UITableViewCell()
         }
 
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
             cell.configureAsNewReviewCell()
         default:
-            cell.configureWithReview(reviews[indexPath.row - 1])
+            cell.configureWithReview(reviews[indexPath.row])
         }
 
         return cell
@@ -91,8 +98,13 @@ class ReviewFeedController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feedbackViewController = FeedbackViewController()
-        navigationController?.pushViewController(feedbackViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.section != 0 {
+            feedbackViewController.model = reviews[indexPath.row]
+        }
+
+        navigationController?.pushViewController(feedbackViewController, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

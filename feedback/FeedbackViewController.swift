@@ -14,6 +14,7 @@ class FeedbackViewController: UIViewController {
         $0.backgroundColor = .red
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .vertical
+        $0.spacing = 8
     }
 
     lazy var innerViewBottomConstraint = NSLayoutConstraint()
@@ -21,6 +22,7 @@ class FeedbackViewController: UIViewController {
     let mainInput: UITextView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
+        $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         $0.textColor = UIColor(white: 1, alpha: 0.9)
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -29,6 +31,14 @@ class FeedbackViewController: UIViewController {
     let collectionView = FeedbackCollectionView()
 
     var keyboardVisible = false
+
+    var model: Review? {
+        didSet {
+            if !mainInput.hasText {
+                mainInput.text = model?.reviewText
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +81,11 @@ class FeedbackViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        saveCurrentModel()
+        super.viewWillDisappear(true)
+    }
+
     @objc
     func keyboardWillAppear(_ sender: NSNotification) {
         guard keyboardVisible == false else {
@@ -84,8 +99,6 @@ class FeedbackViewController: UIViewController {
                 return
         }
 
-        print(kbSize)
-
         innerViewBottomConstraint.isActive = false
         innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -kbSize.height)
         innerViewBottomConstraint.isActive = true
@@ -93,5 +106,16 @@ class FeedbackViewController: UIViewController {
         UIView.animate(withDuration: 1.0, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+
+    func saveCurrentModel() {
+        guard var review = model else {
+            self.model = Review()
+            saveCurrentModel()
+            return
+        }
+
+        review.reviewText = mainInput.text
+        review.save()
     }
 }
