@@ -40,14 +40,13 @@ class FeedbackViewController: UIViewController {
         }
     }
 
+    var reviewedShow: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
-
-        navigationItem.title = "Give Feedback"
+        navigationItem.title = "Write a Review"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: nil, action: nil)
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
@@ -110,8 +109,12 @@ class FeedbackViewController: UIViewController {
 
     func saveCurrentModel() {
         guard var review = model else {
-            self.model = Review()
+            self.model = Review(withShow: reviewedShow ?? "") // this could probably be better?
             saveCurrentModel()
+            return
+        }
+
+        guard mainInput.hasText else {
             return
         }
 

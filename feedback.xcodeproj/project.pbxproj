@@ -13,6 +13,7 @@
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */; };
 		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
+		1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */; };
 		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
 		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */; };
@@ -37,6 +38,7 @@
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedController.swift; sourceTree = "<group>"; };
 		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPickingViewController.swift; sourceTree = "<group>"; };
 		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
 		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedCell.swift; sourceTree = "<group>"; };
@@ -113,9 +115,10 @@
 			children = (
 				1AB165952150643B00F273E7 /* Account VCs */,
 				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
+				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
 				1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */,
-				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
+				1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */,
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
+				1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

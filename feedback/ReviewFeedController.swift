@@ -97,14 +97,16 @@ class ReviewFeedController: UITableViewController {
     // MARK: - Navigation
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let feedbackViewController = FeedbackViewController()
         tableView.deselectRow(at: indexPath, animated: true)
 
         if indexPath.section != 0 {
+            let feedbackViewController = FeedbackViewController()
             feedbackViewController.model = reviews[indexPath.row]
+            navigationController?.pushViewController(feedbackViewController, animated: true)
+        } else {
+            let showPickingViewController = ShowPickingViewController()
+            navigationController?.pushViewController(showPickingViewController, animated: true)
         }
-
-        navigationController?.pushViewController(feedbackViewController, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

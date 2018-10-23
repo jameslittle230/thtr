@@ -14,29 +14,35 @@ typealias ReviewID = String
 struct Review {
     let userEmail: String
     var reviewText: String
+    var show: String
     var key: String?
+    var updated: Date?
 
     var dict: [String: Any] {
-        let dict = [
+        return [
             "user": userEmail,
-            "text": reviewText
+            "text": reviewText,
+            "show": show,
+            "updated": Date().timeIntervalSince1970
         ]
-
-        return dict
     }
 
     init?(snapshot: DataSnapshot) {
         guard let email = snapshot.childSnapshot(forPath: "user").value as? String,
-            let text = snapshot.childSnapshot(forPath: "text").value as? String else {
+            let text = snapshot.childSnapshot(forPath: "text").value as? String,
+            let show = snapshot.childSnapshot(forPath: "show").value as? String,
+            let updated = snapshot.childSnapshot(forPath: "updated").value as? Double else {
                 return nil
         }
 
         key = snapshot.key
         userEmail = email
         reviewText = text
+        self.show = show
+        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
     }
 
-    init?() {
+    init?(withShow show: String) {
         guard let email = Auth.auth().currentUser?.email else {
             return nil
         }
@@ -44,6 +50,7 @@ struct Review {
         key = nil
         reviewText = ""
         userEmail = email
+        self.show = show
     }
 
     func save() {

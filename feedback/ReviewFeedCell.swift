@@ -32,7 +32,20 @@ class ReviewFeedCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 8
         $0.font = UIFont.preferredFont(forTextStyle: .body)
-        $0.textColor = .white
+        $0.textColor = Themer.DarkTheme.text
+    }
+
+    let metaLabel: UILabel = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.numberOfLines = 1
+        $0.font = UIFont.preferredFont(forTextStyle: .caption1)
+        $0.textColor = Themer.DarkTheme.placeholderText
+    }
+
+    let stackView: UIStackView = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 8
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,8 +54,11 @@ class ReviewFeedCell: UITableViewCell {
         contentView.addSubview(insetContentView)
         insetContentView.anchorToSuperviewAnchors(withHorizontalInset: 18, andVerticalInset: 9)
 
-        insetContentView.addSubview(contentLabel)
-        contentLabel.anchorToSuperviewAnchors(withInsetSize: 12)
+        stackView.addArrangedSubview(contentLabel)
+        stackView.addArrangedSubview(metaLabel)
+
+        insetContentView.addSubview(stackView)
+        stackView.anchorToSuperviewAnchors(withInsetSize: 12)
 
         insetContentView.layer.insertSublayer(insetCVGradient, at: 0)
     }
@@ -69,6 +85,11 @@ class ReviewFeedCell: UITableViewCell {
 
     func configureWithReview(_ review: Review) {
         contentLabel.text = review.reviewText
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        let formattedDate = formatter.string(from: review.updated ?? Date())
+        metaLabel.text = "\(review.show) • \(formattedDate)"
     }
 
 }
