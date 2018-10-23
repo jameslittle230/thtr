@@ -74,6 +74,10 @@ class AccountViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = visibleCells[indexPath.row]
 

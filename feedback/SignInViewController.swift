@@ -12,7 +12,7 @@ import Firebase
 class SignInViewController: UITableViewController {
 
     let emailInput: UITextField = create {
-        $0.placeholder = "james@example.com"
+        $0.attributedPlaceholder = NSAttributedString(string: "james@example.com", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
         $0.textAlignment = .right
         $0.autocapitalizationType = .none
         $0.keyboardType = .emailAddress
@@ -26,7 +26,7 @@ class SignInViewController: UITableViewController {
     }
 
     let passwordInput: UITextField = create {
-        $0.placeholder = "Password"
+        $0.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
         $0.textAlignment = .right
         $0.isSecureTextEntry = true
         $0.autocorrectionType = .no
@@ -72,6 +72,8 @@ class SignInViewController: UITableViewController {
 
         navigationItem.title = "Sign In"
 
+        tableView.separatorColor = Themer.DarkTheme.placeholderText
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
@@ -101,7 +103,7 @@ class SignInViewController: UITableViewController {
         case 2:
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Sign In"
-            cell.textLabel?.textColor = self.view.tintColor
+//            cell.textLabel?.textColor = self.view.tintColor
             subview = nil
         default:
             fatalError("That's not how math works")

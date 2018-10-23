@@ -9,13 +9,26 @@
 import UIKit
 
 class Themer {
+    struct DarkTheme {
+        static let background = UIColor(hex: "#072028")
+        static let tint = UIColor(hex: "#e56447")
+        static let text = UIColor(white: 1, alpha: 0.9)
+        static let placeholderText = UIColor(white: 1, alpha: 0.4)
+    }
+
     class func configure() {
-        UITableView.appearance().backgroundColor = UIColor(hex: "#072028")
-        UITableViewCell.appearance().backgroundColor = UIColor(hex: "#072028")
+        UITableView.appearance().backgroundColor = Themer.DarkTheme.background
+        UITableViewCell.appearance().backgroundColor = Themer.DarkTheme.background
 
         UINavigationBar.appearance().barStyle = .blackOpaque
-        UINavigationBar.appearance().tintColor = UIColor(hex: "#e56447")
+        UINavigationBar.appearance().tintColor = Themer.DarkTheme.tint
 
-        UITextView.appearance().backgroundColor = UIColor(hex: "#072028")
+        UITextView.appearance().backgroundColor = Themer.DarkTheme.background
+        UILabel.appearance().textColor = Themer.DarkTheme.text
+
+        UITableView.appearance().separatorColor = Themer.DarkTheme.placeholderText
+
+        UITextField.appearance().tintColor = Themer.DarkTheme.tint
+        UITextField.appearance().textColor = Themer.DarkTheme.text
     }
 }

@@ -29,6 +29,7 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = UIColor(hex: "#072028")
 
         self.heightAnchor.constraint(equalToConstant: cellHeight).isActive = true
     }

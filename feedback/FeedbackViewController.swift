@@ -22,7 +22,7 @@ class FeedbackViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        $0.textColor = .white
+        $0.textColor = UIColor(white: 1, alpha: 0.9)
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
@@ -39,11 +39,10 @@ class FeedbackViewController: UIViewController {
 
         navigationItem.title = "Give Feedback"
 
-        view.backgroundColor = UIColor(hex: "#072028")
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
         stackView.addArrangedSubview(collectionView)
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#072028")
 
         if #available(iOS 11.0, *) {
             innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

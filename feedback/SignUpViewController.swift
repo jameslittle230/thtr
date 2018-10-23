@@ -72,6 +72,8 @@ class SignUpViewController: UITableViewController {
 
         navigationItem.title = "Sign Up"
 
+        tableView.separatorColor = Themer.DarkTheme.placeholderText
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
