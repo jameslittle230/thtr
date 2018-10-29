@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UITableViewController {
+class LogInViewController: UITableViewController {
 
     let emailInput: UITextField = create {
         $0.attributedPlaceholder = NSAttributedString(string: "james@example.com", attributes: [.foregroundColor: Themer.DarkTheme.placeholderText])
@@ -19,7 +19,7 @@ class SignInViewController: UITableViewController {
         $0.autocorrectionType = .no
     }
 
-    let emailLabel: UILabel = create {
+    let emailLabel: THLabel = create {
         $0.text = "Email"
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class SignInViewController: UITableViewController {
         $0.autocapitalizationType = .none
     }
 
-    let passwordLabel: UILabel = create {
+    let passwordLabel: THLabel = create {
         $0.text = "Password"
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -70,11 +70,9 @@ class SignInViewController: UITableViewController {
         emailField.addArrangedSubview(emailLabel)
         emailField.addArrangedSubview(emailInput)
 
-        navigationItem.title = "Sign In"
+        navigationItem.title = "Log In"
 
-        tableView.separatorColor = Themer.DarkTheme.placeholderText
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -103,7 +101,7 @@ class SignInViewController: UITableViewController {
         case 2:
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Sign In"
-//            cell.textLabel?.textColor = self.view.tintColor
+            cell.textLabel?.textColor = self.view.tintColor
             subview = nil
         default:
             fatalError("That's not how math works")
@@ -152,7 +150,7 @@ class SignInViewController: UITableViewController {
                 Notification(name: Notification.Name(rawValue: "UserSetNotification"),
                              object: user, userInfo: nil))
 
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
 }

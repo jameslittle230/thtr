@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A170C1C213F0BFF00C014B3 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A170C1B213F0BFF00C014B3 /* FeedbackViewModel.swift */; };
+		1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318D2187CD1000617BFA /* THTableViewCell.swift */; };
+		1A0D31902187D00900617BFA /* THLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318F2187D00900617BFA /* THLabel.swift */; };
 		1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1607213870E3002EEE68 /* AppDelegate.swift */; };
 		1A1A160F213870E5002EEE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A160E213870E5002EEE68 /* Assets.xcassets */; };
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
@@ -22,7 +23,7 @@
 		1A830248216FCBC9001EEF7A /* Themer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830247216FCBC9001EEF7A /* Themer.swift */; };
 		1AA8107621457EAB00D395E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */; };
 		1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB16593214FF7FD00F273E7 /* AccountViewController.swift */; };
-		1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* SignInViewController.swift */; };
+		1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* LogInViewController.swift */; };
 		1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165992150675300F273E7 /* UIKit+Autolayout.swift */; };
 		1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659C215084E200F273E7 /* SignUpViewController.swift */; };
 		1AB1659F2150850D00F273E7 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659E2150850D00F273E7 /* Create.swift */; };
@@ -30,7 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A170C1B213F0BFF00C014B3 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
+		1A0D318D2187CD1000617BFA /* THTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THTableViewCell.swift; sourceTree = "<group>"; };
+		1A0D318F2187D00900617BFA /* THLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLabel.swift; sourceTree = "<group>"; };
 		1A1A1604213870E3002EEE68 /* feedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = feedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1A1607213870E3002EEE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A1A160E213870E5002EEE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		1A830247216FCBC9001EEF7A /* Themer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themer.swift; sourceTree = "<group>"; };
 		1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AB16593214FF7FD00F273E7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		1AB165962150649E00F273E7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1AB165962150649E00F273E7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		1AB165992150675300F273E7 /* UIKit+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Autolayout.swift"; sourceTree = "<group>"; };
 		1AB1659C215084E200F273E7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1AB1659E2150850D00F273E7 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
@@ -68,14 +70,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A170C1A213F0BEF00C014B3 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				1A170C1B213F0BFF00C014B3 /* FeedbackViewModel.swift */,
-			);
-			name = "View Models";
-			sourceTree = "<group>";
-		};
 		1A1A15FB213870E3002EEE68 = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +97,6 @@
 				1AB165982150674600F273E7 /* Extensions */,
 				1A6786732163EF5900E7A79C /* Models */,
 				1A1A161A2138A33F002EEE68 /* Supporting Files */,
-				1A170C1A213F0BEF00C014B3 /* View Models */,
 				1A3950262159B87100D0BD7D /* Views */,
 				1A830247216FCBC9001EEF7A /* Themer.swift */,
 			);
@@ -138,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */,
+				1A0D318F2187D00900617BFA /* THLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -146,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */,
+				1A0D318D2187CD1000617BFA /* THTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -161,7 +156,7 @@
 		1AB165952150643B00F273E7 /* Account VCs */ = {
 			isa = PBXGroup;
 			children = (
-				1AB165962150649E00F273E7 /* SignInViewController.swift */,
+				1AB165962150649E00F273E7 /* LogInViewController.swift */,
 				1AB1659C215084E200F273E7 /* SignUpViewController.swift */,
 			);
 			name = "Account VCs";
@@ -338,19 +333,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */,
 				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
-				1A170C1C213F0BFF00C014B3 /* FeedbackViewModel.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
 				1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
-				1AB165972150649E00F273E7 /* SignInViewController.swift in Sources */,
+				1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */,
 				1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
 				1A6786772163EFB700E7A79C /* Review.swift in Sources */,
 				1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */,
 				1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */,
 				1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */,
+				1A0D31902187D00900617BFA /* THLabel.swift in Sources */,
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
 				1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */,

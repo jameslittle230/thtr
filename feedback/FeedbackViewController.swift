@@ -46,7 +46,6 @@ class FeedbackViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = "Write a Review"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: nil, action: nil)
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)

@@ -13,13 +13,13 @@ class AccountViewController: UITableViewController {
 
     enum CellTypes {
         case signUp
-        case signIn
+        case logIn
         case changePassword
         case signOut
     }
 
     var visibleCells = [
-        CellTypes.signIn,
+        CellTypes.logIn,
         CellTypes.signUp
     ]
 
@@ -35,7 +35,7 @@ class AccountViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = doneButton
         self.navigationItem.title = defaultNavigationTitle
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseId)
 
         NotificationCenter.default.addObserver(self, selector: #selector(userWasSet),
                                                name: Notification.Name("UserSetNotification"), object: nil)
@@ -61,8 +61,8 @@ class AccountViewController: UITableViewController {
         switch cellType {
         case .changePassword:
             cell.textLabel?.text = "Change Password"
-        case .signIn:
-            cell.textLabel?.text = "Sign In"
+        case .logIn:
+            cell.textLabel?.text = "Log In"
         case .signUp:
             cell.textLabel?.text = "Sign Up"
         case .signOut:
@@ -98,8 +98,8 @@ class AccountViewController: UITableViewController {
             self.present(alert, animated: true, completion: nil)
 
             return
-        case .signIn:
-            navigationController?.pushViewController(SignInViewController(), animated: true)
+        case .logIn:
+            navigationController?.pushViewController(LogInViewController(), animated: true)
         case .signUp:
             navigationController?.pushViewController(SignUpViewController(), animated: true)
         case .signOut:
@@ -133,7 +133,7 @@ class AccountViewController: UITableViewController {
             self.visibleCells = [.changePassword, .signOut]
         } else {
             navigationItem.title = "Account"
-            self.visibleCells = [.signIn, .signUp]
+            self.visibleCells = [.logIn, .signUp]
         }
 
         tableView.reloadData()

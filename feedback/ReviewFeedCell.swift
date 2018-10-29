@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewFeedCell: UITableViewCell {
+class ReviewFeedCell: THTableViewCell {
 
     let insetContentView: UIView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -28,14 +28,14 @@ class ReviewFeedCell: UITableViewCell {
         $0.cornerRadius = 8
     }
 
-    let contentLabel: UILabel = create {
+    let contentLabel: THLabel = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 8
         $0.font = UIFont.preferredFont(forTextStyle: .body)
-        $0.textColor = Themer.DarkTheme.text
+//        $0.textColor = Themer.DarkTheme.text
     }
 
-    let metaLabel: UILabel = create {
+    let metaLabel: THLabel = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 1
         $0.font = UIFont.preferredFont(forTextStyle: .caption1)

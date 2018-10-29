@@ -40,7 +40,14 @@ class ShowPickingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Shows"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(popThroughToGoBack))
+    }
+
+    @objc
+    func popThroughToGoBack(button: UIBarButtonItem) {
+        navigationController?.popToRootViewController(animated: true)
     }
 
     // MARK: - Table view data source

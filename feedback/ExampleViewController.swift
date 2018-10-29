@@ -10,7 +10,7 @@ import UIKit
 
 class ExampleViewController: UIViewController {
 
-    let label: UILabel = create {
+    let label: THLabel = create {
         $0.text = "This is a new screen of the app. Other things will go here, but not yet ;)"
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,6 @@ class ExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
         view.addSubview(label)
         label.anchorToSuperviewAnchors()
     }

@@ -19,7 +19,7 @@ class SignUpViewController: UITableViewController {
         $0.autocorrectionType = .no
     }
 
-    let emailLabel: UILabel = create {
+    let emailLabel: THLabel = create {
         $0.text = "Email"
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -47,13 +47,13 @@ class SignUpViewController: UITableViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let passwordLabel: UILabel = create {
+    let passwordLabel: THLabel = create {
         $0.text = "Password"
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let passwordConfirmLabel: UILabel = create {
+    let passwordConfirmLabel: THLabel = create {
         $0.text = "Confirm Password"
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -95,9 +95,7 @@ class SignUpViewController: UITableViewController {
 
         navigationItem.title = "Sign Up"
 
-        tableView.separatorColor = Themer.DarkTheme.placeholderText
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +126,7 @@ class SignUpViewController: UITableViewController {
         case 3:
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Sign Up"
+            cell.textLabel?.textColor = self.view.tintColor
             subview = nil
         default:
             fatalError("That's not how math works")
