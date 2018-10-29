@@ -90,7 +90,7 @@ class AccountViewController: UITableViewController {
             }
 
             let successMessage = NSLocalizedString("You will get an email with a link that will let you change your password. You will also be signed out.", comment: "Change Password Success Message")
-            let alert = UIAlertController(title: "Error", message: successMessage, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Are you sure?", message: successMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 Auth.auth().sendPasswordReset(withEmail: email, completion: self.didSendPasswordReset)
             }))
