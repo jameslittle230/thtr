@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class ReviewFeedController: UITableViewController {
+class ReviewFeedViewController: UITableViewController {
 
     let cellReuseIdentifier = "reuseIdentifier"
 

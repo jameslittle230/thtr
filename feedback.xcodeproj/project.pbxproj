@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318D2187CD1000617BFA /* THTableViewCell.swift */; };
 		1A0D31902187D00900617BFA /* THLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318F2187D00900617BFA /* THLabel.swift */; };
+		1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D31912188D11B00617BFA /* RatingViewController.swift */; };
 		1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1607213870E3002EEE68 /* AppDelegate.swift */; };
 		1A1A160F213870E5002EEE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A160E213870E5002EEE68 /* Assets.xcassets */; };
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
-		1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */; };
+		1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */; };
 		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
 		1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */; };
 		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
@@ -33,12 +34,13 @@
 /* Begin PBXFileReference section */
 		1A0D318D2187CD1000617BFA /* THTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THTableViewCell.swift; sourceTree = "<group>"; };
 		1A0D318F2187D00900617BFA /* THLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLabel.swift; sourceTree = "<group>"; };
+		1A0D31912188D11B00617BFA /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		1A1A1604213870E3002EEE68 /* feedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = feedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1A1607213870E3002EEE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A1A160E213870E5002EEE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A1A1611213870E5002EEE68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedController.swift; sourceTree = "<group>"; };
+		1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedViewController.swift; sourceTree = "<group>"; };
 		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPickingViewController.swift; sourceTree = "<group>"; };
 		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0D31932188D11E00617BFA /* Action Bar VCs */ = {
+			isa = PBXGroup;
+			children = (
+				1A0D31912188D11B00617BFA /* RatingViewController.swift */,
+			);
+			name = "Action Bar VCs";
+			sourceTree = "<group>";
+		};
 		1A1A15FB213870E3002EEE68 = {
 			isa = PBXGroup;
 			children = (
@@ -106,11 +116,12 @@
 		1A1A161921389311002EEE68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A0D31932188D11E00617BFA /* Action Bar VCs */,
 				1AB165952150643B00F273E7 /* Account VCs */,
 				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
 				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
-				1A1A161B2138B12E002EEE68 /* ReviewFeedController.swift */,
+				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
 				1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */,
 			);
 			name = Controllers;
@@ -345,9 +356,10 @@
 				1A6786772163EFB700E7A79C /* Review.swift in Sources */,
 				1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */,
 				1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */,
-				1A1A161C2138B12E002EEE68 /* ReviewFeedController.swift in Sources */,
+				1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */,
 				1A0D31902187D00900617BFA /* THLabel.swift in Sources */,
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
+				1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
 				1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */,
 			);

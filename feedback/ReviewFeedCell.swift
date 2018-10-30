@@ -79,6 +79,7 @@ class ReviewFeedCell: THTableViewCell {
     func configureAsNewReviewCell() {
         contentLabel.text = "New Review..."
         contentLabel.font = UIFont.systemFont(ofSize: 24, weight: .black)
+        stackView.removeArrangedSubview(metaLabel)
 
         insetCVGradient.colors = [UIColor.init(hex: "#cc5333").cgColor, UIColor.init(hex: "#23074d").cgColor]
     }
@@ -88,8 +89,12 @@ class ReviewFeedCell: THTableViewCell {
 
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        let formattedDate = formatter.string(from: review.updated ?? Date())
+        let formattedDate = formatter.string(from: review.updated)
         metaLabel.text = "\(review.show) • \(formattedDate)"
+
+        if let rating = review.rating {
+            metaLabel.text?.append(" • \(rating)★")
+        }
     }
 
 }

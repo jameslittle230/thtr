@@ -22,7 +22,7 @@ class FeedbackViewController: UIViewController {
     let mainInput: UITextView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
-        $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        $0.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         $0.textColor = UIColor(white: 1, alpha: 0.9)
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -51,6 +51,8 @@ class FeedbackViewController: UIViewController {
             if !mainInput.hasText {
                 mainInput.text = model?.reviewText
             }
+
+            collectionView.model = model
         }
     }
 
@@ -89,7 +91,7 @@ class FeedbackViewController: UIViewController {
             // Fallback on earlier versions
         }
 
-        collectionView.viewController = self
+        collectionView.parentViewController = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -133,7 +135,7 @@ class FeedbackViewController: UIViewController {
 
     @objc
     func saveCurrentModel() {
-        guard var review = model else {
+        guard let review = model else {
             self.model = Review(withShow: reviewedShow ?? "") // this could probably be better?
             saveCurrentModel()
             return

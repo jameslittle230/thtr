@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Themer.configure()
 
-        let reviewFeedVC = ReviewFeedController()
+        let reviewFeedVC = ReviewFeedViewController()
         let rootVC = UINavigationController(rootViewController: reviewFeedVC)
         window!.rootViewController = rootVC
         window!.makeKeyAndVisible()

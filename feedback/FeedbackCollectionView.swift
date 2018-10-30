@@ -8,10 +8,10 @@
 
 import UIKit
 
-class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
+class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    let cellHeight: CGFloat = 50
-    let cellWidth: CGFloat = 50
+    let cellHeight: CGFloat = 40
+    let cellWidth: CGFloat = 40
 
     let cellIdentifier = "UICollectionViewCellReuseIdentifier"
 
@@ -19,7 +19,13 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         $0.scrollDirection = .horizontal
     }
 
-    var viewController: UIViewController?
+    var model: Review?
+
+    let cells: [ActionBarItem] = [
+        ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), viewController: RatingViewController())
+    ]
+
+    var parentViewController: FeedbackViewController?
 
     init() {
         super.init(frame: .zero, collectionViewLayout: flowLayout)
@@ -28,7 +34,7 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
 
         register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 
-        self.translatesAutoresizingMaskIntoConstraints = false
+        self.setContentHuggingPriority(.required, for: .vertical)
         self.backgroundColor = UIColor(hex: "#072028")
 
         self.heightAnchor.constraint(equalToConstant: cellHeight).isActive = true
@@ -39,29 +45,41 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return cells.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        let imageView = UIImageView.init(image: UIImage(imageLiteralResourceName: "AppIcon"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        let item = cells[indexPath.row]
 
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: cellHeight),
-            imageView.widthAnchor.constraint(equalToConstant: cellWidth)
-            ])
+        let imageView = UIImageView.init(image: item.image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
 
         cell.contentView.addSubview(imageView)
+        imageView.anchorToSuperviewAnchors(withInsetSize: 8)
+
+        if let value = model?.loadedDict?[item.key] {
+            cell.backgroundColor = .red
+        }
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vctrl = viewController else {
-            return
-        }
-
-        vctrl.navigationController?.pushViewController(ExampleViewController(), animated: true)
+        let item = cells[indexPath.row]
+        item.viewController.model = model
+        parentViewController?.navigationController?.pushViewController(item.viewController, animated: true)
+        parentViewController?.feedbackWasEdited()
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: cellWidth, height: cellHeight)
+    }
+}
+
+struct ActionBarItem {
+    let key: String
+    let image: UIImage?
+    let viewController: RatingViewController
 }

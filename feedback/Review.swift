@@ -11,20 +11,31 @@ import Firebase
 
 typealias ReviewID = String
 
-struct Review {
+class Review {
+    var key: String?
+
     let userEmail: String
     var reviewText: String
     var show: String
-    var key: String?
-    var updated: Date?
+    var updated: Date
+
+    var rating: Int?
+
+    var loadedDict: [String: Any]?
 
     var dict: [String: Any] {
-        return [
+        var baseDict: [String: Any] = [
             "user": userEmail,
             "text": reviewText,
             "show": show,
-            "updated": Date().timeIntervalSince1970
+            "updated": updated.timeIntervalSince1970
         ]
+
+        if let rating = rating {
+            baseDict["rating"] = rating
+        }
+
+        return baseDict
     }
 
     init?(snapshot: DataSnapshot) {
@@ -40,6 +51,12 @@ struct Review {
         reviewText = text
         self.show = show
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+
+        if let rating = snapshot.childSnapshot(forPath: "rating").value as? Int {
+            self.rating = rating
+        }
+
+        self.loadedDict = snapshot.value as? [String: Any]
     }
 
     init?(withShow show: String) {
@@ -51,9 +68,11 @@ struct Review {
         reviewText = ""
         userEmail = email
         self.show = show
+        updated = Date()
     }
 
     func save() {
+        updated = Date()
         let dbRef = Database.database().reference(withPath: "reviews")
         if let key = key {
             // update record
