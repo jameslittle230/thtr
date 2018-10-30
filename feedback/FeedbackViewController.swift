@@ -47,6 +47,9 @@ class FeedbackViewController: UIViewController {
 
         navigationItem.title = "Write a Review"
 
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveCurrentModel))
+
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
         stackView.addArrangedSubview(collectionView)
@@ -79,11 +82,6 @@ class FeedbackViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        saveCurrentModel()
-        super.viewWillDisappear(true)
-    }
-
     @objc
     func keyboardWillAppear(_ sender: NSNotification) {
         guard keyboardVisible == false else {
@@ -106,6 +104,7 @@ class FeedbackViewController: UIViewController {
         })
     }
 
+    @objc
     func saveCurrentModel() {
         guard var review = model else {
             self.model = Review(withShow: reviewedShow ?? "") // this could probably be better?
@@ -114,10 +113,12 @@ class FeedbackViewController: UIViewController {
         }
 
         guard mainInput.hasText else {
+            navigationController?.popToRootViewController(animated: true)
             return
         }
 
         review.reviewText = mainInput.text
         review.save()
+        navigationController?.popToRootViewController(animated: true)
     }
 }
