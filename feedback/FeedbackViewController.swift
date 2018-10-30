@@ -28,6 +28,20 @@ class FeedbackViewController: UIViewController {
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
+    let backButton = UIBarButtonItem(
+        title: "Back",
+        style: .plain,
+        target: self,
+        action: #selector(goBack)
+    )
+
+    let saveButton = UIBarButtonItem(
+        title: "Save",
+        style: .done,
+        target: self,
+        action: #selector(saveCurrentModel)
+    )
+
     let collectionView = FeedbackCollectionView()
 
     var keyboardVisible = false
@@ -48,7 +62,14 @@ class FeedbackViewController: UIViewController {
         navigationItem.title = "Write a Review"
 
         navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveCurrentModel))
+        navigationItem.leftBarButtonItem = backButton
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(feedbackWasEdited),
+            name: UITextView.textDidChangeNotification,
+            object: nil
+        )
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
@@ -105,6 +126,11 @@ class FeedbackViewController: UIViewController {
     }
 
     @objc
+    func feedbackWasEdited() {
+        navigationItem.leftBarButtonItem = saveButton
+    }
+
+    @objc
     func saveCurrentModel() {
         guard var review = model else {
             self.model = Review(withShow: reviewedShow ?? "") // this could probably be better?
@@ -113,12 +139,17 @@ class FeedbackViewController: UIViewController {
         }
 
         guard mainInput.hasText else {
-            navigationController?.popToRootViewController(animated: true)
+            goBack()
             return
         }
 
         review.reviewText = mainInput.text
         review.save()
+        goBack()
+    }
+
+    @objc
+    func goBack() {
         navigationController?.popToRootViewController(animated: true)
     }
 }
