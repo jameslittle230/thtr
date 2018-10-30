@@ -127,7 +127,8 @@ class FeedbackViewController: UIViewController {
 
     @objc
     func feedbackWasEdited() {
-        navigationItem.leftBarButtonItem = saveButton
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.leftBarButtonItems = [saveButton, backButton]
     }
 
     @objc
