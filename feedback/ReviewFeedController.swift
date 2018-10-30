@@ -17,7 +17,8 @@ class ReviewFeedController: UITableViewController {
     var reviews: [Review] = []
 
     lazy var profileButton = UIBarButtonItem(
-        barButtonSystemItem: .bookmarks,
+        image: UIImage(named: "account"),
+        style: .plain,
         target: self,
         action: #selector(displayAccountViewController(sender:))
     )
