@@ -47,8 +47,7 @@ class ReviewFeedViewController: UITableViewController {
 
     func loadData() {
         let dbRef = Database.database().reference(withPath: "reviews")
-        dbRef.queryOrdered(byChild: "user")
-            .queryEqual(toValue: Auth.auth().currentUser?.email ?? "")
+        dbRef.queryOrdered(byChild: "updated")
             .observe(.value) { (multiSnapshot: DataSnapshot) -> Void in
                 self.reviews = []
 
@@ -58,8 +57,14 @@ class ReviewFeedViewController: UITableViewController {
                             continue
                     }
 
-                    self.reviews.append(review)
+                    // client-side auth filtering...
+                    if review.dict["user"] as? String == Auth.auth().currentUser?.email {
+                        self.reviews.append(review)
+                    }
                 }
+
+                // This is also bad.
+                self.reviews.reverse()
 
                 self.tableView.reloadData()
             }
