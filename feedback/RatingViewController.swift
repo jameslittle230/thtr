@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingViewController: UIViewController {
+class RatingViewController: UIViewController, ActionBarViewController {
 
     let starImageViews = [
         UIImageView(),
@@ -31,7 +31,7 @@ class RatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .black
+        view.backgroundColor = Themer.DarkTheme.background
 
         navigationItem.title = "Rating"
 
@@ -58,7 +58,7 @@ class RatingViewController: UIViewController {
             stackView.addArrangedSubview(imageView)
         }
 
-        if let rating = model?.rating {
+        if let rating = model?.extras["rating"] as? Int {
             setControlValue(rating)
         }
 
@@ -73,8 +73,15 @@ class RatingViewController: UIViewController {
             let normalizedXCoord = Int(recognizer.location(in: stackView).x / stackView.bounds.width * 5) + 1
             setControlValue(normalizedXCoord)
 
-            model?.rating = normalizedXCoord
-            navigationController?.popViewController(animated: true)
+            model?.extras["rating"] = normalizedXCoord
+
+            // Add a little bit of a pause before popping the VC, just so users
+            // can see what they've done
+            let timer = Timer(timeInterval: 0.33, repeats: false) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+
+            RunLoop.current.add(timer, forMode: .default)
         }
     }
 
