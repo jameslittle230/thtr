@@ -22,7 +22,8 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
     var model: Review?
 
     let cells: [ActionBarItem] = [
-        ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), viewController: RatingViewController())
+        ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), color: UIColor(hex: "#eacd3e"), viewController: RatingViewController()),
+        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#3eea97"), viewController: PhotoViewController())
     ]
 
     var parentViewController: FeedbackViewController?
@@ -52,24 +53,30 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         let cell = dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         let item = cells[indexPath.row]
 
-        let imageView = UIImageView.init(image: item.image)
+        let imageView = UIImageView(image: item.image?.withRenderingMode(.alwaysTemplate))
+        imageView.tintColor = item.color
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
 
         cell.contentView.addSubview(imageView)
         imageView.anchorToSuperviewAnchors(withInsetSize: 8)
 
-        if let value = model?.loadedDict?[item.key] {
-            cell.backgroundColor = .red
+        if let value = model?.extras[item.key] {
+            cell.backgroundColor = UIColor(hex: "#ea4f3e", alpha: 0.7)
         }
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = cells[indexPath.row]
+        var item = cells[indexPath.row]
         item.viewController.model = model
-        parentViewController?.navigationController?.pushViewController(item.viewController, animated: true)
+
+        guard let actionItemVC = item.viewController as? UIViewController else {
+            return
+        }
+
+        parentViewController?.navigationController?.pushViewController(actionItemVC, animated: true)
         parentViewController?.feedbackWasEdited()
     }
 
@@ -81,5 +88,10 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
 struct ActionBarItem {
     let key: String
     let image: UIImage?
-    let viewController: RatingViewController
+    let color: UIColor
+    var viewController: ActionBarViewController
+}
+
+protocol ActionBarViewController {
+    var model: Review? { get set }
 }

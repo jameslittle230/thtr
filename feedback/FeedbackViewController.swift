@@ -95,10 +95,16 @@ class FeedbackViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        if model == nil {
+            model = Review(withShow: reviewedShow ?? "")
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        collectionView.reloadData()
 
         if !keyboardVisible {
             mainInput.becomeFirstResponder()
@@ -135,19 +141,13 @@ class FeedbackViewController: UIViewController {
 
     @objc
     func saveCurrentModel() {
-        guard let review = model else {
-            self.model = Review(withShow: reviewedShow ?? "") // this could probably be better?
-            saveCurrentModel()
-            return
-        }
-
         guard mainInput.hasText else {
             goBack()
             return
         }
 
-        review.reviewText = mainInput.text
-        review.save()
+        model?.reviewText = mainInput.text
+        model?.save()
         goBack()
     }
 

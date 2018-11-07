@@ -19,23 +19,22 @@ class Review {
     var show: String
     var updated: Date
 
-    var rating: Int?
+    var extras: [String: Any] = [:]
 
     var loadedDict: [String: Any]?
 
     var dict: [String: Any] {
-        var baseDict: [String: Any] = [
+        var output: [String: Any] = [
             "user": userEmail,
             "text": reviewText,
             "show": show,
             "updated": updated.timeIntervalSince1970
         ]
 
-        if let rating = rating {
-            baseDict["rating"] = rating
-        }
+        // Keep old keys if there's a merge conflict
+        output.merge(extras) { (current, _) in current }
 
-        return baseDict
+        return output
     }
 
     init?(snapshot: DataSnapshot) {
@@ -52,11 +51,14 @@ class Review {
         self.show = show
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
 
-        if let rating = snapshot.childSnapshot(forPath: "rating").value as? Int {
-            self.rating = rating
-        }
-
         self.loadedDict = snapshot.value as? [String: Any]
+        self.extras = self.loadedDict?.filter { key, _ in
+            if ["user", "text", "show", "updated"].contains(key) {
+                return false
+            }
+
+            return true
+        } ?? [:]
     }
 
     init?(withShow show: String) {
