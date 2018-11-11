@@ -82,6 +82,7 @@ class ReviewFeedCell: THTableViewCell {
         insetCVGradient.colors = [UIColor.init(hex: "#cc5333").cgColor, UIColor.init(hex: "#23074d").cgColor]
 
         layoutSubviews()
+
     }
 
     func configureWithReview(_ review: Review) {
