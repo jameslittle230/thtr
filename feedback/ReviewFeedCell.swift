@@ -24,15 +24,12 @@ class ReviewFeedCell: THTableViewCell {
     }
 
     let insetCVGradient: CAGradientLayer = create {
-        $0.colors = [UIColor.init(hex: "#ad5389").cgColor, UIColor.init(hex: "#3c1053").cgColor]
         $0.cornerRadius = 8
     }
 
     let contentLabel: THLabel = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 8
-        $0.font = UIFont.preferredFont(forTextStyle: .body)
-//        $0.textColor = Themer.DarkTheme.text
     }
 
     let metaLabel: THLabel = create {
@@ -63,8 +60,9 @@ class ReviewFeedCell: THTableViewCell {
         insetContentView.layer.insertSublayer(insetCVGradient, at: 0)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    // This seems hacky.........
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         insetCVGradient.frame = insetContentView.bounds
     }
 
@@ -79,22 +77,30 @@ class ReviewFeedCell: THTableViewCell {
     func configureAsNewReviewCell() {
         contentLabel.text = "New Review..."
         contentLabel.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        stackView.removeArrangedSubview(metaLabel)
+        metaLabel.text = ""
 
         insetCVGradient.colors = [UIColor.init(hex: "#cc5333").cgColor, UIColor.init(hex: "#23074d").cgColor]
+
+        layoutSubviews()
     }
 
     func configureWithReview(_ review: Review) {
         contentLabel.text = review.reviewText
+        contentLabel.font = UIFont.preferredFont(forTextStyle: .body)
 
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         let formattedDate = formatter.string(from: review.updated)
+
         metaLabel.text = "\(review.show) • \(formattedDate)"
 
-        if let rating = review.rating {
+        if let rating = review.extras["rating"] as? Int {
             metaLabel.text?.append(" • \(rating)★")
         }
+
+        insetCVGradient.colors = [UIColor.init(hex: "#ad5389").cgColor, UIColor.init(hex: "#3c1053").cgColor]
+
+        layoutSubviews()
     }
 
 }
