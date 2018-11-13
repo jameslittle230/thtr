@@ -61,7 +61,7 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         cell.contentView.addSubview(imageView)
         imageView.anchorToSuperviewAnchors(withInsetSize: 8)
 
-        if let value = model?.extras[item.key] {
+        if model?.extras[item.key] != nil {
             cell.backgroundColor = UIColor(hex: "#ea4f3e", alpha: 0.7)
         }
 
