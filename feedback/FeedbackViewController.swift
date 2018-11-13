@@ -28,20 +28,6 @@ class FeedbackViewController: UIViewController {
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
-    let backButton = UIBarButtonItem(
-        title: "Back",
-        style: .plain,
-        target: self,
-        action: #selector(goBack)
-    )
-
-    let saveButton = UIBarButtonItem(
-        title: "Save",
-        style: .done,
-        target: self,
-        action: #selector(saveCurrentModel)
-    )
-
     let collectionView = FeedbackCollectionView()
 
     var keyboardVisible = false
@@ -62,16 +48,6 @@ class FeedbackViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = "Write a Review"
-
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = backButton
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(feedbackWasEdited),
-            name: UITextView.textDidChangeNotification,
-            object: nil
-        )
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
@@ -111,6 +87,11 @@ class FeedbackViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        saveCurrentModel()
+        super.viewWillDisappear(animated)
+    }
+
     @objc
     func keyboardWillAppear(_ sender: NSNotification) {
         guard keyboardVisible == false else {
@@ -134,25 +115,8 @@ class FeedbackViewController: UIViewController {
     }
 
     @objc
-    func feedbackWasEdited() {
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.leftBarButtonItems = [saveButton, backButton]
-    }
-
-    @objc
     func saveCurrentModel() {
-        guard mainInput.hasText else {
-            goBack()
-            return
-        }
-
         model?.reviewText = mainInput.text
         model?.save()
-        goBack()
-    }
-
-    @objc
-    func goBack() {
-        navigationController?.popToRootViewController(animated: true)
     }
 }

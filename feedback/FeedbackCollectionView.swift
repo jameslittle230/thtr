@@ -77,7 +77,6 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         }
 
         parentViewController?.navigationController?.pushViewController(actionItemVC, animated: true)
-        parentViewController?.feedbackWasEdited()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
