@@ -31,8 +31,9 @@
 
 - (instancetype)initWithReference:(FIRStorageReference *)reference
                    fetcherService:(GTMSessionFetcherService *)service
+                    dispatchQueue:(dispatch_queue_t)queue
                        completion:(FIRStorageVoidMetadataError)completion {
-  self = [super initWithReference:reference fetcherService:service];
+  self = [super initWithReference:reference fetcherService:service dispatchQueue:queue];
   if (self) {
     _completion = [completion copy];
   }
@@ -44,26 +45,33 @@
 }
 
 - (void)enqueue {
-  NSMutableURLRequest *request = [self.baseRequest mutableCopy];
-  request.HTTPMethod = @"GET";
-  request.timeoutInterval = self.reference.storage.maxOperationRetryTime;
-
-  FIRStorageVoidMetadataError callback = _completion;
-  _completion = nil;
-
-  GTMSessionFetcher *fetcher = [self.fetcherService fetcherWithRequest:request];
-  _fetcher = fetcher;
-  fetcher.comment = @"GetMetadataTask";
-
   __weak FIRStorageGetMetadataTask *weakSelf = self;
-  _fetcherCompletion = ^(NSData *data, NSError *error) {
-    __strong FIRStorageGetMetadataTask *strongSelf = weakSelf;
-    if (strongSelf) {
-      FIRStorageMetadata *metadata = nil;
+
+  [self dispatchAsync:^() {
+    FIRStorageGetMetadataTask *strongSelf = weakSelf;
+
+    if (!strongSelf) {
+      return;
+    }
+
+    NSMutableURLRequest *request = [strongSelf.baseRequest mutableCopy];
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = strongSelf.reference.storage.maxOperationRetryTime;
+
+    FIRStorageVoidMetadataError callback = strongSelf->_completion;
+    strongSelf->_completion = nil;
+
+    GTMSessionFetcher *fetcher = [strongSelf.fetcherService fetcherWithRequest:request];
+    strongSelf->_fetcher = fetcher;
+    fetcher.comment = @"GetMetadataTask";
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+    strongSelf->_fetcherCompletion = ^(NSData *data, NSError *error) {
+      FIRStorageMetadata *metadata;
       if (error) {
-        if (!strongSelf.error) {
-          strongSelf.error =
-              [FIRStorageErrors errorWithServerError:error reference:strongSelf.reference];
+        if (!self.error) {
+          self.error = [FIRStorageErrors errorWithServerError:error reference:self.reference];
         }
       } else {
         NSDictionary *responseDictionary = [NSDictionary frs_dictionaryFromJSONData:data];
@@ -71,19 +79,20 @@
           metadata = [[FIRStorageMetadata alloc] initWithDictionary:responseDictionary];
           [metadata setType:FIRStorageMetadataTypeFile];
         } else {
-          strongSelf.error = [FIRStorageErrors errorWithInvalidRequest:data];
+          self.error = [FIRStorageErrors errorWithInvalidRequest:data];
         }
       }
 
       if (callback) {
-        callback(metadata, strongSelf.error);
+        callback(metadata, self.error);
       }
-      strongSelf->_fetcherCompletion = nil;
-    }
-  };
+      self->_fetcherCompletion = nil;
+    };
+#pragma clang diagnostic pop
 
-  [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
-    weakSelf.fetcherCompletion(data, error);
+    [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+      weakSelf.fetcherCompletion(data, error);
+    }];
   }];
 }
 

@@ -29,9 +29,10 @@
 
 - (instancetype)initWithReference:(FIRStorageReference *)reference
                    fetcherService:(GTMSessionFetcherService *)service
+                    dispatchQueue:(dispatch_queue_t)queue
                          metadata:(FIRStorageMetadata *)metadata
                        completion:(FIRStorageVoidMetadataError)completion {
-  self = [super initWithReference:reference fetcherService:service];
+  self = [super initWithReference:reference fetcherService:service dispatchQueue:queue];
   if (self) {
     _updateMetadata = [metadata copy];
     _completion = [completion copy];
@@ -44,32 +45,39 @@
 }
 
 - (void)enqueue {
-  NSMutableURLRequest *request = [self.baseRequest mutableCopy];
-  NSDictionary *updateDictionary = [_updateMetadata updatedMetadata];
-  NSData *updateData = [NSData frs_dataFromJSONDictionary:updateDictionary];
-  request.HTTPMethod = @"PATCH";
-  request.timeoutInterval = self.reference.storage.maxOperationRetryTime;
-  request.HTTPBody = updateData;
-  NSString *typeString = @"application/json; charset=UTF-8";
-  [request setValue:typeString forHTTPHeaderField:@"Content-Type"];
-  NSString *lengthString = [NSString stringWithFormat:@"%zu", (unsigned long)[updateData length]];
-  [request setValue:lengthString forHTTPHeaderField:@"Content-Length"];
-
-  FIRStorageVoidMetadataError callback = _completion;
-  _completion = nil;
-
-  GTMSessionFetcher *fetcher = [self.fetcherService fetcherWithRequest:request];
-  _fetcher = fetcher;
-
   __weak FIRStorageUpdateMetadataTask *weakSelf = self;
-  _fetcherCompletion = ^(NSData *data, NSError *error) {
-    __strong FIRStorageUpdateMetadataTask *strongSelf = weakSelf;
-    if (strongSelf) {
+
+  [self dispatchAsync:^() {
+    FIRStorageUpdateMetadataTask *strongSelf = weakSelf;
+
+    if (!strongSelf) {
+      return;
+    }
+
+    NSMutableURLRequest *request = [strongSelf.baseRequest mutableCopy];
+    NSDictionary *updateDictionary = [strongSelf->_updateMetadata updatedMetadata];
+    NSData *updateData = [NSData frs_dataFromJSONDictionary:updateDictionary];
+    request.HTTPMethod = @"PATCH";
+    request.timeoutInterval = strongSelf.reference.storage.maxOperationRetryTime;
+    request.HTTPBody = updateData;
+    NSString *typeString = @"application/json; charset=UTF-8";
+    [request setValue:typeString forHTTPHeaderField:@"Content-Type"];
+    NSString *lengthString = [NSString stringWithFormat:@"%zu", (unsigned long)[updateData length]];
+    [request setValue:lengthString forHTTPHeaderField:@"Content-Length"];
+
+    FIRStorageVoidMetadataError callback = strongSelf->_completion;
+    strongSelf->_completion = nil;
+
+    GTMSessionFetcher *fetcher = [strongSelf.fetcherService fetcherWithRequest:request];
+    strongSelf->_fetcher = fetcher;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+    strongSelf->_fetcherCompletion = ^(NSData *data, NSError *error) {
       FIRStorageMetadata *metadata;
       if (error) {
-        if (!strongSelf.error) {
-          strongSelf.error =
-              [FIRStorageErrors errorWithServerError:error reference:strongSelf.reference];
+        if (!self.error) {
+          self.error = [FIRStorageErrors errorWithServerError:error reference:self.reference];
         }
       } else {
         NSDictionary *responseDictionary = [NSDictionary frs_dictionaryFromJSONData:data];
@@ -77,21 +85,22 @@
           metadata = [[FIRStorageMetadata alloc] initWithDictionary:responseDictionary];
           [metadata setType:FIRStorageMetadataTypeFile];
         } else {
-          strongSelf.error = [FIRStorageErrors errorWithInvalidRequest:data];
+          self.error = [FIRStorageErrors errorWithInvalidRequest:data];
         }
       }
 
       if (callback) {
-        callback(metadata, strongSelf.error);
+        callback(metadata, self.error);
       }
-      strongSelf->_fetcherCompletion = nil;
-    }
-  };
+      self->_fetcherCompletion = nil;
+    };
+#pragma clang diagnostic pop
 
-  fetcher.comment = @"UpdateMetadataTask";
+    fetcher.comment = @"UpdateMetadataTask";
 
-  [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
-    weakSelf.fetcherCompletion(data, error);
+    [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+      weakSelf.fetcherCompletion(data, error);
+    }];
   }];
 }
 
