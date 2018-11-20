@@ -23,7 +23,8 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
 
     let cells: [ActionBarItem] = [
         ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), color: UIColor(hex: "#eacd3e"), viewController: RatingViewController()),
-        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#3eea97"), viewController: PhotoViewController())
+        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#3eea97"), viewController: PhotoViewController()),
+        ActionBarItem(key: "sliders", image: UIImage(named: "sliders"), color: UIColor(hex: "#f7893b"), viewController: SliderViewController())
     ]
 
     var parentViewController: FeedbackViewController?
@@ -33,10 +34,10 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
         delegate = self
         dataSource = self
 
-        register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        register(FeedbackCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 
         self.setContentHuggingPriority(.required, for: .vertical)
-        self.backgroundColor = UIColor(hex: "#072028")
+        self.backgroundColor = Themer.DarkTheme.background
 
         self.heightAnchor.constraint(equalToConstant: cellHeight).isActive = true
     }
@@ -50,16 +51,11 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let cell = dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? FeedbackCollectionViewCell ?? FeedbackCollectionViewCell()
+        cell.backgroundColor = .clear
         let item = cells[indexPath.row]
 
-        let imageView = UIImageView(image: item.image?.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = item.color
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-
-        cell.contentView.addSubview(imageView)
-        imageView.anchorToSuperviewAnchors(withInsetSize: 8)
+        cell.model = item
 
         if model?.extras[item.key] != nil {
             cell.backgroundColor = UIColor(hex: "#ea4f3e", alpha: 0.7)
@@ -93,4 +89,32 @@ struct ActionBarItem {
 
 protocol ActionBarViewController {
     var model: Review? { get set }
+}
+
+class FeedbackCollectionViewCell: UICollectionViewCell {
+    let imageView: UIImageView = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFill
+    }
+
+    var model: ActionBarItem? {
+        didSet {
+            if let model = model {
+                imageView.tintColor = model.color
+                imageView.image = model.image?.withRenderingMode(.alwaysTemplate)
+            }
+        }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        contentView.addSubview(imageView)
+        imageView.anchorToSuperviewAnchors(withInsetSize: 8)
+        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

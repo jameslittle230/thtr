@@ -58,7 +58,7 @@ class FeedbackViewController: UIViewController {
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
         stackView.addArrangedSubview(collectionView)
-        view.backgroundColor = UIColor(hex: "#072028")
+        view.backgroundColor = Themer.DarkTheme.background
 
         if #available(iOS 11.0, *) {
             innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
