@@ -10,6 +10,11 @@ import UIKit
 
 class FeedbackViewController: UIViewController {
 
+    let saveButton: UIBarButtonItem = create {
+        $0.action = #selector(saveAndGoBack)
+        $0.title = "Save"
+    }
+
     let stackView: UIStackView = create {
         $0.backgroundColor = .red
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +53,7 @@ class FeedbackViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = "Write a Review"
+        navigationItem.leftBarButtonItem = saveButton
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
@@ -112,6 +118,12 @@ class FeedbackViewController: UIViewController {
         UIView.animate(withDuration: 1.0, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+
+    @objc
+    func saveAndGoBack() {
+        saveCurrentModel()
+        navigationController?.popToRootViewController(animated: true)
     }
 
     @objc

@@ -132,6 +132,8 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
         if let image = info[.originalImage] as? UIImage {
             saveImage(image)
             imageView.image = image
+            imageVisible = true
+            self.tableView.reloadData()
         } else {
             print("Something went wrong")
         }
