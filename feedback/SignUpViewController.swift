@@ -71,6 +71,17 @@ class SignUpViewController: UITableViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    let confirmButton: UIButton = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.titleLabel?.textColor = Themer.DarkTheme.tint
+    }
+
+    let confirmButtonContainer: UIStackView = create {
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     let cellReuseId = "reuseIdentifier"
 
     init() {
@@ -92,6 +103,12 @@ class SignUpViewController: UITableViewController {
 
         passwordConfirmField.addArrangedSubview(passwordConfirmLabel)
         passwordConfirmField.addArrangedSubview(passwordConfirmInput)
+
+        confirmButtonContainer.addArrangedSubview(confirmButton)
+
+        confirmButton.setTitle("Sign Up", for: .normal)
+        confirmButton.setTitleColor(Themer.DarkTheme.tint, for: .normal)
+        confirmButton.addTarget(self, action: #selector(submitForm), for: .touchUpInside)
 
         navigationItem.title = "Sign Up"
 
@@ -124,10 +141,7 @@ class SignUpViewController: UITableViewController {
         case 2:
             subview = passwordConfirmField
         case 3:
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.text = "Sign Up"
-            cell.textLabel?.textColor = self.view.tintColor
-            subview = nil
+            subview = confirmButtonContainer
         default:
             fatalError("That's not how math works")
         }
@@ -145,17 +159,20 @@ class SignUpViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        return
+    }
 
-        guard indexPath.row == 3 else {
-            return
-        }
-
+    @objc
+    func submitForm() {
         guard let email = emailInput.text,
             let password = passwordInput.text,
             let passwordConf = passwordConfirmInput.text else {
-            return
+                return
         }
 
         guard password == passwordConf else {

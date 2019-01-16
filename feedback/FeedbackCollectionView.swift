@@ -111,7 +111,6 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
 
         contentView.addSubview(imageView)
         imageView.anchorToSuperviewAnchors(withInsetSize: 8)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {

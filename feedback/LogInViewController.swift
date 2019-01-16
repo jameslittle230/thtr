@@ -51,6 +51,17 @@ class LogInViewController: UITableViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    let confirmButton: UIButton = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.titleLabel?.textColor = Themer.DarkTheme.tint
+    }
+
+    let confirmButtonContainer: UIStackView = create {
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     let cellReuseId = "reuseIdentifier"
 
     init() {
@@ -69,6 +80,12 @@ class LogInViewController: UITableViewController {
 
         emailField.addArrangedSubview(emailLabel)
         emailField.addArrangedSubview(emailInput)
+
+        confirmButtonContainer.addArrangedSubview(confirmButton)
+
+        confirmButton.setTitle("Log In", for: .normal)
+        confirmButton.setTitleColor(Themer.DarkTheme.tint, for: .normal)
+        confirmButton.addTarget(self, action: #selector(submitForm), for: .touchUpInside)
 
         navigationItem.title = "Log In"
 
@@ -99,10 +116,7 @@ class LogInViewController: UITableViewController {
         case 1:
             subview = passwordField
         case 2:
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.text = "Sign In"
-            cell.textLabel?.textColor = self.view.tintColor
-            subview = nil
+            subview = confirmButtonContainer
         default:
             fatalError("That's not how math works")
         }
@@ -121,12 +135,15 @@ class LogInViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        return
+    }
 
-        guard indexPath.row == 2 else {
-            return
-        }
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 
+    @objc
+    func submitForm() {
         guard let email = emailInput.text, let password = passwordInput.text else {
             return
         }
