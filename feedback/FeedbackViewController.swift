@@ -16,7 +16,6 @@ class FeedbackViewController: UIViewController {
     }
 
     let stackView: UIStackView = create {
-        $0.backgroundColor = .red
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .vertical
         $0.spacing = 8
@@ -27,7 +26,7 @@ class FeedbackViewController: UIViewController {
     let mainInput: UITextView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = true
-        $0.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+        $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         $0.textColor = UIColor(white: 1, alpha: 0.9)
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)

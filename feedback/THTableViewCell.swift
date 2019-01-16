@@ -10,14 +10,19 @@ import UIKit
 
 class THTableViewCell: UITableViewCell {
 
+    let THSelectedBackgroundView: UIView = create {
+        $0.backgroundColor = Themer.DarkTheme.backgroundHighlighted
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         textLabel?.textColor = Themer.DarkTheme.text
+
+        self.selectedBackgroundView = THSelectedBackgroundView
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -26,8 +31,6 @@ class THTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

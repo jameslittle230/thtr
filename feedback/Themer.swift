@@ -11,6 +11,7 @@ import UIKit
 class Themer {
     struct DarkTheme {
         static let background = UIColor(hex: "#072028")
+        static let backgroundHighlighted = UIColor(hex: "#0b303d")
         static let tint = UIColor(hex: "#e56447")
         static let text = UIColor(white: 1, alpha: 0.9)
         static let placeholderText = UIColor(white: 1, alpha: 0.4)
