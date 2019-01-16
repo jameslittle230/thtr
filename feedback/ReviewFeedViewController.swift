@@ -95,6 +95,9 @@ class ReviewFeedViewController: UITableViewController {
             cell.configureAsNewReviewCell()
         default:
             cell.configureWithReview(reviews[indexPath.row])
+
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressCell))
+            cell.addGestureRecognizer(longPressGesture)
         }
 
         return cell
@@ -124,5 +127,30 @@ class ReviewFeedViewController: UITableViewController {
         let accountVC = AccountViewController()
         let popoverRootVC = UINavigationController(rootViewController: accountVC)
         present(popoverRootVC, animated: true, completion: nil)
+    }
+
+    @objc
+    func didLongPressCell(_ sender: UIGestureRecognizer) {
+        guard let cell = sender.view as? ReviewFeedCell else {
+            return
+        }
+
+        if sender.state == .began {
+            guard cell.contentType == .existingReview, let review = cell.review else {
+                return
+            }
+
+            let actionSheet = UIAlertController(title: review.reviewText.truncate(length: 80),
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+
+            actionSheet.addAction(UIAlertAction(title: "Delete Review", style: .destructive) { _ in
+                review.delete()
+            })
+
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return })
+
+            present(actionSheet, animated: true)
+        }
     }
 }

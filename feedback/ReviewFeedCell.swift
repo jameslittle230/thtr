@@ -10,6 +10,14 @@ import UIKit
 
 class ReviewFeedCell: THTableViewCell {
 
+    enum ContentType {
+        case newReview
+        case existingReview
+    }
+
+    var contentType: ContentType?
+    var review: Review?
+
     let insetContentView: UIView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 8
@@ -75,6 +83,8 @@ class ReviewFeedCell: THTableViewCell {
     }
 
     func configureAsNewReviewCell() {
+        contentType = .newReview
+
         contentLabel.text = "New Review..."
         contentLabel.font = UIFont.systemFont(ofSize: 24, weight: .black)
         metaLabel.text = ""
@@ -86,6 +96,9 @@ class ReviewFeedCell: THTableViewCell {
     }
 
     func configureWithReview(_ review: Review) {
+        contentType = .existingReview
+        self.review = review
+
         contentLabel.text = review.reviewText
         contentLabel.font = UIFont.preferredFont(forTextStyle: .body)
 
@@ -103,5 +116,4 @@ class ReviewFeedCell: THTableViewCell {
 
         layoutSubviews()
     }
-
 }

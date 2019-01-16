@@ -86,4 +86,12 @@ class Review {
             newRef.setValue(self.dict)
         }
     }
+
+    func delete() {
+        let dbRef = Database.database().reference(withPath: "reviews")
+        if let key = key {
+            let newRef = dbRef.child(key)
+            newRef.removeValue()
+        }
+    }
 }

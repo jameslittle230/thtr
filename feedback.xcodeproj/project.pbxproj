@@ -18,6 +18,7 @@
 		1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */; };
 		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
 		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
+		1A5F069221EF9DF10081713A /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F069121EF9DF10081713A /* String+Truncate.swift */; };
 		1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */; };
 		1A6786772163EFB700E7A79C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786762163EFB700E7A79C /* Review.swift */; };
 		1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */; };
@@ -47,6 +48,7 @@
 		1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPickingViewController.swift; sourceTree = "<group>"; };
 		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
 		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+		1A5F069121EF9DF10081713A /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
 		1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedCell.swift; sourceTree = "<group>"; };
 		1A6786762163EFB700E7A79C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				1AB165992150675300F273E7 /* UIKit+Autolayout.swift */,
 				1AB1659E2150850D00F273E7 /* Create.swift */,
 				1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */,
+				1A5F069121EF9DF10081713A /* String+Truncate.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5F069221EF9DF10081713A /* String+Truncate.swift in Sources */,
 				1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */,
 				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
