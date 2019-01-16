@@ -11,7 +11,7 @@ import UIKit
 class FeedbackViewController: UIViewController {
 
     let saveButton: UIBarButtonItem = create {
-        $0.action = #selector(saveAndGoBack)
+        $0.action = #selector(exitToReviewVC)
         $0.title = "Save"
     }
 
@@ -121,8 +121,7 @@ class FeedbackViewController: UIViewController {
     }
 
     @objc
-    func saveAndGoBack() {
-        saveCurrentModel()
+    func exitToReviewVC() {
         navigationController?.popToRootViewController(animated: true)
     }
 
