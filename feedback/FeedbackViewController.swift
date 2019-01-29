@@ -11,7 +11,7 @@ import UIKit
 class FeedbackViewController: UIViewController {
 
     let saveButton: UIBarButtonItem = create {
-        $0.action = #selector(exitToReviewVC)
+        $0.action = #selector(saveAndExitToRoot)
         $0.title = "Save"
     }
 
@@ -92,11 +92,6 @@ class FeedbackViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        saveCurrentModel()
-        super.viewWillDisappear(animated)
-    }
-
     @objc
     func keyboardWillAppear(_ sender: NSNotification) {
         guard keyboardVisible == false else {
@@ -120,7 +115,8 @@ class FeedbackViewController: UIViewController {
     }
 
     @objc
-    func exitToReviewVC() {
+    func saveAndExitToRoot() {
+        saveCurrentModel()
         navigationController?.popToRootViewController(animated: true)
     }
 
