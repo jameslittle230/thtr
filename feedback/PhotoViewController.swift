@@ -12,6 +12,8 @@ import FirebaseStorage
 
 class PhotoViewController: UITableViewController, ActionBarViewController {
 
+    let maxFileSizeInBytes: Int64 = 3 * 1024 * 1024
+
     let cellReuseId = "UITableViewCellReuseIdentifier"
 
     var model: Review?
@@ -42,10 +44,10 @@ class PhotoViewController: UITableViewController, ActionBarViewController {
             let storageRef = storage.reference()
             let imageRef = storageRef.child(imagePath)
 
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            imageRef.getData(maxSize: maxFileSizeInBytes) { data, error in
                 if let error = error {
                     print(error)
-                    // Uh-oh, an error occurred!
+                    Analytics.logEvent("image_download_error", parameters: nil)
                 } else {
                     self.imageView.image = UIImage(data: data!)
                     self.imageVisible = true
@@ -147,8 +149,16 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
 
         let imagesRef = storageRef.child("reviewImages")
 
-        guard let data = image.jpegData(compressionQuality: 0.4) else {
+        guard var data = image.jpegData(compressionQuality: 0.4) else {
             return
+        }
+
+        if data.count > maxFileSizeInBytes {
+            guard let smallerData = image.jpegData(compressionQuality: 0.2) else {
+                return
+            }
+
+            data = smallerData // There should maybe be a better way of checking this but oh well
         }
 
         let filePath = "\(Auth.auth().currentUser!.uid)/\(Date().timeIntervalSince1970)"
