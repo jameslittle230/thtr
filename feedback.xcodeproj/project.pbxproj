@@ -133,7 +133,6 @@
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
 				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
 				1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */,
-				1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -180,6 +179,7 @@
 			children = (
 				1AB165962150649E00F273E7 /* LogInViewController.swift */,
 				1AB1659C215084E200F273E7 /* SignUpViewController.swift */,
+				1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */,
 			);
 			name = "Account VCs";
 			sourceTree = "<group>";

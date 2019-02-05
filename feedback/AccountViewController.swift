@@ -17,8 +17,6 @@ class AccountViewController: UITableViewController, MFMailComposeViewControllerD
         case logIn
         case changePassword
         case signOut
-
-        case changeProfilePicture
         case reportAProblem
         case privacyPolicy
     }
@@ -32,7 +30,6 @@ class AccountViewController: UITableViewController, MFMailComposeViewControllerD
 
     let loggedInVisibleCells = [
         CellType.changePassword,
-        CellType.changeProfilePicture,
         CellType.signOut,
         CellType.reportAProblem,
         CellType.privacyPolicy
@@ -86,8 +83,6 @@ class AccountViewController: UITableViewController, MFMailComposeViewControllerD
             cell.textLabel?.text = "Sign Up"
         case .signOut:
             cell.textLabel?.text = "Sign Out"
-        case .changeProfilePicture:
-            cell.textLabel?.text = "Change Profile Picture"
         case .privacyPolicy:
             cell.textLabel?.text = "Privacy Policy"
         case .reportAProblem:
@@ -129,8 +124,6 @@ class AccountViewController: UITableViewController, MFMailComposeViewControllerD
             navigationController?.pushViewController(SignUpViewController(), animated: true)
         case .signOut:
             signOut()
-        case .changeProfilePicture:
-            break
         case .reportAProblem:
             if !MFMailComposeViewController.canSendMail() {
                 let alert = UIAlertController(title: "You cannot send mail today.", message: "Bummer.", preferredStyle: .alert)
