@@ -7,21 +7,38 @@
 //
 
 import UIKit
+import MessageUI
 import Firebase
 
-class AccountViewController: UITableViewController {
+class AccountViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
-    enum CellTypes {
+    enum CellType {
         case signUp
         case logIn
         case changePassword
         case signOut
+
+        case changeProfilePicture
+        case reportAProblem
+        case privacyPolicy
     }
 
-    var visibleCells = [
-        CellTypes.logIn,
-        CellTypes.signUp
+    let loggedOutVisibleCells = [
+        CellType.logIn,
+        CellType.signUp,
+        CellType.reportAProblem,
+        CellType.privacyPolicy
     ]
+
+    let loggedInVisibleCells = [
+        CellType.changePassword,
+        CellType.changeProfilePicture,
+        CellType.signOut,
+        CellType.reportAProblem,
+        CellType.privacyPolicy
+    ]
+
+    var visibleCells: [CellType] = []
 
     let defaultNavigationTitle = "Account"
 
@@ -31,6 +48,8 @@ class AccountViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        visibleCells = loggedOutVisibleCells
 
         self.navigationItem.rightBarButtonItem = doneButton
         self.navigationItem.title = defaultNavigationTitle
@@ -67,6 +86,12 @@ class AccountViewController: UITableViewController {
             cell.textLabel?.text = "Sign Up"
         case .signOut:
             cell.textLabel?.text = "Sign Out"
+        case .changeProfilePicture:
+            cell.textLabel?.text = "Change Profile Picture"
+        case .privacyPolicy:
+            cell.textLabel?.text = "Privacy Policy"
+        case .reportAProblem:
+            cell.textLabel?.text = "Report a Problem"
         }
 
         cell.accessoryType = .disclosureIndicator
@@ -104,6 +129,30 @@ class AccountViewController: UITableViewController {
             navigationController?.pushViewController(SignUpViewController(), animated: true)
         case .signOut:
             signOut()
+        case .changeProfilePicture:
+            break
+        case .reportAProblem:
+            if !MFMailComposeViewController.canSendMail() {
+                let alert = UIAlertController(title: "You cannot send mail today.", message: "Bummer.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = self
+
+            // Configure the fields of the interface.
+            composeVC.setToRecipients(["jlittle@bowdoin.edu"])
+            composeVC.setSubject("Feedback about THTR")
+            composeVC.setMessageBody("", isHTML: false)
+
+            // Present the view controller modally.
+            self.present(composeVC, animated: true, completion: nil)
+        case .privacyPolicy:
+            let privacyVC = PrivacyPolicyViewController()
+            let popoverRootVC = UINavigationController(rootViewController: privacyVC)
+            present(popoverRootVC, animated: true, completion: nil)
         }
     }
 
@@ -130,10 +179,10 @@ class AccountViewController: UITableViewController {
     func userWasSet() {
         if let user = Auth.auth().currentUser {
             navigationItem.title = user.email
-            self.visibleCells = [.changePassword, .signOut]
+            self.visibleCells = loggedInVisibleCells
         } else {
             navigationItem.title = "Account"
-            self.visibleCells = [.logIn, .signUp]
+            self.visibleCells = loggedOutVisibleCells
         }
 
         tableView.reloadData()
