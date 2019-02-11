@@ -24,6 +24,8 @@
 		1A6786772163EFB700E7A79C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786762163EFB700E7A79C /* Review.swift */; };
 		1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */; };
 		1A830248216FCBC9001EEF7A /* Themer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A830247216FCBC9001EEF7A /* Themer.swift */; };
+		1AA413B02212057B0078DA89 /* THNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA413AF2212057B0078DA89 /* THNavigationController.swift */; };
+		1AA413B2221207560078DA89 /* LaunchModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA413B1221207560078DA89 /* LaunchModalViewController.swift */; };
 		1AA8107621457EAB00D395E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */; };
 		1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB16593214FF7FD00F273E7 /* AccountViewController.swift */; };
 		1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165962150649E00F273E7 /* LogInViewController.swift */; };
@@ -55,6 +57,8 @@
 		1A6786762163EFB700E7A79C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		1A830247216FCBC9001EEF7A /* Themer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themer.swift; sourceTree = "<group>"; };
+		1AA413AF2212057B0078DA89 /* THNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THNavigationController.swift; sourceTree = "<group>"; };
+		1AA413B1221207560078DA89 /* LaunchModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModalViewController.swift; sourceTree = "<group>"; };
 		1AA8107521457EAB00D395E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AB16593214FF7FD00F273E7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		1AB165962150649E00F273E7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				1A1A161A2138A33F002EEE68 /* Supporting Files */,
 				1A3950262159B87100D0BD7D /* Views */,
 				1A830247216FCBC9001EEF7A /* Themer.swift */,
+				1AA413AF2212057B0078DA89 /* THNavigationController.swift */,
 			);
 			path = feedback;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
 				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
 				1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */,
+				1AA413B1221207560078DA89 /* LaunchModalViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 				1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */,
 				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
+				1AA413B2221207560078DA89 /* LaunchModalViewController.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
 				1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
@@ -397,6 +404,7 @@
 				1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
 				1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */,
+				1AA413B02212057B0078DA89 /* THNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
