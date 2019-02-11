@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import Firebase
 
-class AccountViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+class AccountViewController: UITableViewController {
 
     enum CellType {
         case signUp
@@ -186,4 +186,10 @@ class AccountViewController: UITableViewController, MFMailComposeViewControllerD
         userWasSet()
     }
 
+}
+
+extension AccountViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
