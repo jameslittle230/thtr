@@ -19,21 +19,28 @@ class AccountViewController: UITableViewController {
         case signOut
         case reportAProblem
         case privacyPolicy
+        case versionInfo
     }
 
-    let loggedOutVisibleCells = [
-        CellType.logIn,
-        CellType.signUp,
+    private static let alwaysVisibleCells = [
         CellType.reportAProblem,
-        CellType.privacyPolicy
+        CellType.privacyPolicy,
+        CellType.versionInfo
     ]
 
-    let loggedInVisibleCells = [
-        CellType.changePassword,
-        CellType.signOut,
-        CellType.reportAProblem,
-        CellType.privacyPolicy
-    ]
+    var loggedOutVisibleCells: [CellType] {
+        return [
+            CellType.logIn,
+            CellType.signUp
+        ] + AccountViewController.alwaysVisibleCells
+    }
+
+    var loggedInVisibleCells: [CellType] {
+        return [
+            CellType.changePassword,
+            CellType.signOut
+            ] + AccountViewController.alwaysVisibleCells
+    }
 
     var visibleCells: [CellType] = []
 
@@ -87,6 +94,14 @@ class AccountViewController: UITableViewController {
             cell.textLabel?.text = "Privacy Policy"
         case .reportAProblem:
             cell.textLabel?.text = "Report a Problem"
+        case .versionInfo:
+            let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+            let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+            cell.textLabel?.text = "\(appVersionString) (\(buildNumber))"
+            cell.textLabel?.textColor = Themer.DarkTheme.placeholderText
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+            cell.textLabel?.textAlignment = .center
+            return cell // different here bc no disclosure indicator
         }
 
         cell.accessoryType = .disclosureIndicator
@@ -146,6 +161,8 @@ class AccountViewController: UITableViewController {
             let privacyVC = PrivacyPolicyViewController()
             let popoverRootVC = UINavigationController(rootViewController: privacyVC)
             present(popoverRootVC, animated: true, completion: nil)
+        case .versionInfo:
+            return
         }
     }
 
