@@ -21,7 +21,12 @@ class SliderViewController: UITableViewController, ActionBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(FeedbackSliderTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(FeedbackSliderTableViewCell.self, forCellReuseIdentifier: "FSReuseIdentifier")
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.separatorColor = UIColor.clear
+        tableView.alwaysBounceVertical = false
+
+        navigationItem.title = "Distortion"
 
         if let sliderVals = model?.extras["sliders"] as? Int {
             viewModels[.timeDistortion]?.value = Float(sliderVals / 100) // 100s digit
@@ -49,30 +54,49 @@ class SliderViewController: UITableViewController, ActionBarViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? FeedbackSliderTableViewCell ?? FeedbackSliderTableViewCell()
+        if indexPath.row < 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FSReuseIdentifier", for: indexPath) as? FeedbackSliderTableViewCell ?? FeedbackSliderTableViewCell()
 
-        let type: FeedbackDimension = {
-            switch indexPath.row {
-            case 0:
-                return .timeDistortion
-            case 1:
-                return .spaceDistortion
-            case 2:
-                return .bodyDistortion
-            default:
-                fatalError()
-            }
-        }()
+            let type: FeedbackDimension = {
+                switch indexPath.row {
+                case 0:
+                    return .timeDistortion
+                case 1:
+                    return .spaceDistortion
+                case 2:
+                    return .bodyDistortion
+                default:
+                    fatalError()
+                }
+            }()
 
-        cell.model = viewModels[type]
+            cell.model = viewModels[type]
 
-        return cell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+            cell.textLabel?.text = "Use the Distortion Sliders to record a show's mediatization. To the left (more white) equals less media influence. Move a button to the right (more blue) to record greater media in the time, space, and bodies used in performance. \n\nFor more information on recording performance distortion, cf. Bay-Cheng, et al., Performance and Media: Taxonomies for a Changing Field (2015)."
+            return cell
+        }
     }
 
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let label = THLabel()
+//        label.text = "Distortion Sliders"
+//        label.font = UIFont.preferredFont(forTextStyle: .headline)
+//        label.textAlignment = .center
+//        return label
+//    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
 
 typealias FeedbackValue = Float
@@ -142,7 +166,7 @@ class FeedbackSliderTableViewCell: THTableViewCell {
         NSLayoutConstraint.activate([
             slider.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             slider.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor, constant: contentView.layoutMargins.left * 3),
-            slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -contentView.layoutMargins.right),
+            slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -contentView.layoutMargins.right * 3),
             slider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
             ])
 

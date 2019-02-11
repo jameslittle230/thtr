@@ -39,6 +39,8 @@ class PhotoViewController: UITableViewController, ActionBarViewController {
         tableView.estimatedRowHeight = 85.0
         tableView.rowHeight = UITableView.automaticDimension
 
+        navigationItem.title = "Add a Photo"
+
         if let imagePath = model?.extras["photo"] as? String {
             let storage = Storage.storage()
             let storageRef = storage.reference()
