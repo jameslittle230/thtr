@@ -97,7 +97,7 @@ class AccountViewController: UITableViewController {
         case .versionInfo:
             let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
             let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            cell.textLabel?.text = "\(appVersionString) (\(buildNumber))"
+            cell.textLabel?.text = "Build Number: \(appVersionString) (\(buildNumber))"
             cell.textLabel?.textColor = Themer.DarkTheme.placeholderText
             cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
             cell.textLabel?.textAlignment = .center
