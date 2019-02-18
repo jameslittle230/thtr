@@ -35,6 +35,11 @@ class SliderViewController: UITableViewController, ActionBarViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setCellLabelWidths()
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         let time = floor(viewModels[.timeDistortion]?.value ?? 0) * 100
         let space = floor(viewModels[.spaceDistortion]?.value ?? 0) * 10
@@ -45,6 +50,27 @@ class SliderViewController: UITableViewController, ActionBarViewController {
         }
 
         super.viewWillDisappear(animated)
+    }
+
+    func setCellLabelWidths() {
+        let widths: [CGFloat] = tableView.visibleCells.compactMap {
+            guard let cell = $0 as? FeedbackSliderTableViewCell else {
+                return nil
+            }
+            return cell.typeLabel.frame.width
+        }
+
+        guard let maxLabelWidth = widths.max() else {
+            return
+        }
+
+        tableView.visibleCells.forEach {
+            guard let cell = $0 as? FeedbackSliderTableViewCell else {
+                return
+            }
+
+            cell.setWidthConstraintTo(maxLabelWidth)
+        }
     }
 
     // MARK: - Table view data source
@@ -80,7 +106,7 @@ class SliderViewController: UITableViewController, ActionBarViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
             cell.textLabel?.text = "Use the Distortion Sliders to record a show's mediatization. To the left (more white) equals less media influence. Move a button to the right (more blue) to record greater media in the time, space, and bodies used in performance. \n\nFor more information on recording performance distortion, cf. Bay-Cheng, et al., Performance and Media: Taxonomies for a Changing Field (2015)."
             return cell
         }
@@ -173,8 +199,13 @@ class FeedbackSliderTableViewCell: THTableViewCell {
         NSLayoutConstraint.activate([
             typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.layoutMargins.left * 3),
-            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             ])
+    }
+
+    func setWidthConstraintTo(_ width: CGFloat) {
+        NSLayoutConstraint.activate([typeLabel.widthAnchor.constraint(equalToConstant: width)])
+        layoutSubviews()
     }
 
     @objc
