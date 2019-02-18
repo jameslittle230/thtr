@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LaunchModalViewController: UIViewController {
+class LaunchModalViewController: UITableViewController {
 
     let icon: UIImageView = create {
         $0.image = UIImage(named: "AppIcon")
@@ -21,6 +21,9 @@ class LaunchModalViewController: UIViewController {
         $0.layer.shadowOpacity = 1
         $0.layer.shadowRadius = 8.0
         $0.clipsToBounds = false
+
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 20
     }
 
     let label: THLabel = create {
@@ -29,17 +32,11 @@ class LaunchModalViewController: UIViewController {
         let attributedText = NSMutableAttributedString(string: content)
 
         var style = NSMutableParagraphStyle()
-        style.lineSpacing = 8 // change line spacing between paragraph like 36 or 48
-//        style.minimumLineHeight = 12 // change line spacing between each line like 30 or 40
+        style.lineSpacing = 8
         attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: NSRange(location: 0, length: content.count))
 
         $0.attributedText = attributedText
-    }
 
-    var mainStackView: UIStackView = create {
-        $0.spacing = 8
-        $0.axis = .vertical
-//        $0.distribution = .equalSpacing
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -48,21 +45,39 @@ class LaunchModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Themer.DarkTheme.background
+        tableView.register(THTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.separatorColor = UIColor.clear
+        tableView.alwaysBounceVertical = false
+
         navigationItem.rightBarButtonItem = doneButton
-        navigationItem.title = "About this App"
+        navigationItem.title = "About This App"
+    }
 
-        view.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(icon)
-        mainStackView.addArrangedSubview(label)
+    // MARK: - Table view data source
 
-        mainStackView.anchorToSuperviewAnchors(withHorizontalInset: 12, andVerticalInset: 128)
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
-        NSLayoutConstraint.activate([
-//            icon.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.5),
-//            icon.centerYAnchor.constraint(equalTo: mainStackView.centerYAnchor),
-            icon.heightAnchor.constraint(equalTo: mainStackView.heightAnchor, multiplier: 0.25)
-        ])
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        if indexPath.row == 0 {
+            cell.contentView.addSubview(icon)
+            icon.anchorToSuperviewAnchors(withHorizontalInset: 0, andVerticalInset: 36)
+        } else {
+            cell.contentView.addSubview(label)
+            label.anchorToSuperviewAnchors(withHorizontalInset: 24, andVerticalInset: 12)
+        }
+        cell.isUserInteractionEnabled = false
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 
     @objc
