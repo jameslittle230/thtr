@@ -199,7 +199,7 @@ class FeedbackSliderTableViewCell: THTableViewCell {
         NSLayoutConstraint.activate([
             typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.layoutMargins.left * 3),
-            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
             ])
     }
 

@@ -47,8 +47,7 @@ class ReviewFeedViewController: UITableViewController {
 
     func loadData() {
         let dbRef = Database.database().reference(withPath: "reviews")
-        dbRef.queryOrdered(byChild: "updated")
-            .observe(.value) { (multiSnapshot: DataSnapshot) -> Void in
+        dbRef.queryOrdered(byChild: "updated") .observe(.value) { (multiSnapshot: DataSnapshot) -> Void in
                 self.reviews = []
 
                 for child in multiSnapshot.children {
@@ -68,7 +67,6 @@ class ReviewFeedViewController: UITableViewController {
 
                 self.tableView.reloadData()
             }
-
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
