@@ -1,15 +1,15 @@
 //
-//  ShowPickingViewController.swift
+//  ShowSelectionViewController.swift
 //  feedback
 //
-//  Created by James Little on 10/23/18.
-//  Copyright © 2018 James Little. All rights reserved.
+//  Created by James Little on 2/25/19.
+//  Copyright © 2019 James Little. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class ShowPickingViewController: UITableViewController {
+class ShowSelectionViewController: UITableViewController {
 
     enum Section: CaseIterable {
         case serverSideShows
@@ -65,7 +65,7 @@ class ShowPickingViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return ShowPickingViewController.Section.count
+        return ShowSelectionViewController.Section.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +78,7 @@ class ShowPickingViewController: UITableViewController {
         switch Section.get(indexPath.section) {
         case .serverSideShows:
             cell.textLabel?.text = shows[indexPath.row].name
-//            cell.detailTextLabel?.text = shows[indexPath.row].theater
+        //            cell.detailTextLabel?.text = shows[indexPath.row].theater
         case .createYourOwn:
             cell.textLabel?.text = "Add your own"
         }

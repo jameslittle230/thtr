@@ -111,8 +111,8 @@ class ReviewFeedViewController: UITableViewController {
             feedbackViewController.model = reviews[indexPath.row]
             navigationController?.pushViewController(feedbackViewController, animated: true)
         } else {
-            let showPickingViewController = ShowPickingViewController()
-            navigationController?.pushViewController(showPickingViewController, animated: true)
+            let showSelectionVC = ShowSelectionViewController()
+            navigationController?.pushViewController(showSelectionVC, animated: true)
         }
     }
 

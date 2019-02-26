@@ -1,5 +1,5 @@
 //
-//  ShowCreationViewController.swift
+//  ShowDescriptionViewController.swift
 //  feedback
 //
 //  Created by James Little on 2/25/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShowCreationViewController: UITableViewController {
+class ShowDescriptionViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

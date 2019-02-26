@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A086D5A2224EAD700CC8451 /* ShowSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A086D592224EAD700CC8451 /* ShowSelectionViewController.swift */; };
+		1A086D5C2224EAE700CC8451 /* ShowCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A086D5B2224EAE700CC8451 /* ShowCreationViewController.swift */; };
+		1A086D5E2224EAFD00CC8451 /* ShowDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A086D5D2224EAFD00CC8451 /* ShowDescriptionViewController.swift */; };
 		1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318D2187CD1000617BFA /* THTableViewCell.swift */; };
 		1A0D31902187D00900617BFA /* THLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D318F2187D00900617BFA /* THLabel.swift */; };
 		1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0D31912188D11B00617BFA /* RatingViewController.swift */; };
@@ -15,7 +18,6 @@
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */; };
 		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
-		1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */; };
 		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
 		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */; };
@@ -33,13 +35,15 @@
 		1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659C215084E200F273E7 /* SignUpViewController.swift */; };
 		1AB1659F2150850D00F273E7 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659E2150850D00F273E7 /* Create.swift */; };
 		1AD7B620221B36C000E7D041 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7B61F221B36C000E7D041 /* Show.swift */; };
-		1AD7B622221B51BB00E7D041 /* ShowCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7B621221B51BB00E7D041 /* ShowCreationViewController.swift */; };
 		1AEEEE54219E036E00FAB465 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEE53219E036E00FAB465 /* PhotoViewController.swift */; };
 		1AEEEE56219E0D0D00FAB465 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEE55219E0D0D00FAB465 /* SliderViewController.swift */; };
 		CFECFBD2B16A189ADF22B39B /* Pods_feedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A086D592224EAD700CC8451 /* ShowSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSelectionViewController.swift; sourceTree = "<group>"; };
+		1A086D5B2224EAE700CC8451 /* ShowCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCreationViewController.swift; sourceTree = "<group>"; };
+		1A086D5D2224EAFD00CC8451 /* ShowDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDescriptionViewController.swift; sourceTree = "<group>"; };
 		1A0D318D2187CD1000617BFA /* THTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THTableViewCell.swift; sourceTree = "<group>"; };
 		1A0D318F2187D00900617BFA /* THLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLabel.swift; sourceTree = "<group>"; };
 		1A0D31912188D11B00617BFA /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +54,6 @@
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedViewController.swift; sourceTree = "<group>"; };
 		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
-		1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPickingViewController.swift; sourceTree = "<group>"; };
 		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
 		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +71,6 @@
 		1AB1659C215084E200F273E7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1AB1659E2150850D00F273E7 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		1AD7B61F221B36C000E7D041 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		1AD7B621221B51BB00E7D041 /* ShowCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCreationViewController.swift; sourceTree = "<group>"; };
 		1AEEEE53219E036E00FAB465 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		1AEEEE55219E0D0D00FAB465 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,11 +90,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A086D582224EAC700CC8451 /* Show VCs */ = {
+			isa = PBXGroup;
+			children = (
+				1A086D5B2224EAE700CC8451 /* ShowCreationViewController.swift */,
+				1A086D5D2224EAFD00CC8451 /* ShowDescriptionViewController.swift */,
+				1A086D592224EAD700CC8451 /* ShowSelectionViewController.swift */,
+			);
+			name = "Show VCs";
+			sourceTree = "<group>";
+		};
 		1A0D31932188D11E00617BFA /* Action Bar VCs */ = {
 			isa = PBXGroup;
 			children = (
-				1A0D31912188D11B00617BFA /* RatingViewController.swift */,
 				1AEEEE53219E036E00FAB465 /* PhotoViewController.swift */,
+				1A0D31912188D11B00617BFA /* RatingViewController.swift */,
 				1AEEEE55219E0D0D00FAB465 /* SliderViewController.swift */,
 			);
 			name = "Action Bar VCs";
@@ -135,15 +147,14 @@
 		1A1A161921389311002EEE68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A0D31932188D11E00617BFA /* Action Bar VCs */,
-				1AB165952150643B00F273E7 /* Account VCs */,
 				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
 				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
 				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
-				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
-				1A355CEF217F64FD0030E52C /* ShowPickingViewController.swift */,
 				1AA413B1221207560078DA89 /* LaunchModalViewController.swift */,
-				1AD7B621221B51BB00E7D041 /* ShowCreationViewController.swift */,
+				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
+				1AB165952150643B00F273E7 /* Account VCs */,
+				1A0D31932188D11E00617BFA /* Action Bar VCs */,
+				1A086D582224EAC700CC8451 /* Show VCs */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -190,8 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				1AB165962150649E00F273E7 /* LogInViewController.swift */,
-				1AB1659C215084E200F273E7 /* SignUpViewController.swift */,
 				1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */,
+				1AB1659C215084E200F273E7 /* SignUpViewController.swift */,
 			);
 			name = "Account VCs";
 			sourceTree = "<group>";
@@ -389,15 +400,16 @@
 			files = (
 				1A5F069221EF9DF10081713A /* String+Truncate.swift in Sources */,
 				1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */,
+				1A086D5E2224EAFD00CC8451 /* ShowDescriptionViewController.swift in Sources */,
 				1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */,
 				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
 				1AA413B2221207560078DA89 /* LaunchModalViewController.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
 				1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */,
+				1A086D5A2224EAD700CC8451 /* ShowSelectionViewController.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
 				1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */,
-				1AD7B622221B51BB00E7D041 /* ShowCreationViewController.swift in Sources */,
 				1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
 				1A6786772163EFB700E7A79C /* Review.swift in Sources */,
@@ -410,8 +422,8 @@
 				1A0D31902187D00900617BFA /* THLabel.swift in Sources */,
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
 				1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */,
+				1A086D5C2224EAE700CC8451 /* ShowCreationViewController.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
-				1A355CF0217F64FD0030E52C /* ShowPickingViewController.swift in Sources */,
 				1AA413B02212057B0078DA89 /* THNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
