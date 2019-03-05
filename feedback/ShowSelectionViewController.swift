@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 
-class ShowSelectionViewController: UITableViewController {
+class ShowSelectionViewController: UITableViewController, ActionBarViewController {
+    var model: Review?
 
     enum Section: CaseIterable {
         case serverSideShows
@@ -94,8 +95,15 @@ class ShowSelectionViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Section.get(indexPath.section) {
         case .serverSideShows:
-            let feedbackViewController = FeedbackViewController()
-            feedbackViewController.reviewedShow = shows[indexPath.row].key
+            guard let showkey = shows[indexPath.row].key,
+                let review = model ?? Review(withShow: showkey) else {
+                    let alert = UIAlertController(title: "Internal error", message: "Couldn't select server-side show", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Bummer.", style: .default, handler: { _ in return }))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+            }
+
+            let feedbackViewController = FeedbackViewController(withReview: review)
             navigationController?.pushViewController(feedbackViewController, animated: true)
         case .createYourOwn:
             let showCreationViewController = ShowCreationViewController()
