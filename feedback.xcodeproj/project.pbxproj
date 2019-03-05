@@ -21,6 +21,7 @@
 		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
 		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */; };
+		1A558E4D222C813A00D7B4B7 /* String+Slugify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */; };
 		1A5F069221EF9DF10081713A /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F069121EF9DF10081713A /* String+Truncate.swift */; };
 		1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */; };
 		1A6786772163EFB700E7A79C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6786762163EFB700E7A79C /* Review.swift */; };
@@ -57,6 +58,7 @@
 		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
 		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Slugify.swift"; sourceTree = "<group>"; };
 		1A5F069121EF9DF10081713A /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
 		1A6786742163EF9C00E7A79C /* ReviewFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedCell.swift; sourceTree = "<group>"; };
 		1A6786762163EFB700E7A79C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				1AB1659E2150850D00F273E7 /* Create.swift */,
 				1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */,
 				1A5F069121EF9DF10081713A /* String+Truncate.swift */,
+				1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */,
 				1AEEEE54219E036E00FAB465 /* PhotoViewController.swift in Sources */,
 				1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */,
+				1A558E4D222C813A00D7B4B7 /* String+Slugify.swift in Sources */,
 				1AD7B620221B36C000E7D041 /* Show.swift in Sources */,
 				1A0D31902187D00900617BFA /* THLabel.swift in Sources */,
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,

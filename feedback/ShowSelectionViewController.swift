@@ -69,7 +69,12 @@ class ShowSelectionViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section < 2 ? shows.count : 1
+        switch Section.get(section) {
+        case .serverSideShows:
+            return shows.count
+        case .createYourOwn:
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,8 +82,7 @@ class ShowSelectionViewController: UITableViewController {
 
         switch Section.get(indexPath.section) {
         case .serverSideShows:
-            cell.textLabel?.text = shows[indexPath.row].name
-        //            cell.detailTextLabel?.text = shows[indexPath.row].theater
+            cell.textLabel?.text = shows[indexPath.row].title
         case .createYourOwn:
             cell.textLabel?.text = "Add your own"
         }

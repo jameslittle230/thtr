@@ -47,6 +47,7 @@ class FeedbackViewController: UIViewController {
     }
 
     var reviewedShow: String?
+    var show: Show?
 
     override func viewDidLoad() {
         super.viewDidLoad()

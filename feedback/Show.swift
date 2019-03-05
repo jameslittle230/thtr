@@ -13,48 +13,73 @@ import MapKit
 class Show {
     var key: String?
 
-    var name: String
-    var playwright: String
-    var description: String
-    var theater: String
-    var date: Date?
+    var title: String
+    var creator: String
+    var venue: String
+    var date: Date
+
+    var description: String?
     var loc: CLLocationCoordinate2D?
     var created: Date?
 
     let dateFormatter = ISO8601DateFormatter()
 
     var dict: [String: Any] {
-        return [
-            "name": name,
-            "playwright": playwright,
-            "date": date ?? "",
-            "loc": [
-                "lat": loc?.latitude,
-                "long": loc?.longitude
-            ],
-            "theater": theater,
-            "description": description
-        ]
+        var output: [String: Any] = [
+            "title": title,
+            "creator": creator,
+            "date": dateFormatter.string(from: date),
+            "venue": venue,
+            ]
+
+        if let loc = self.loc {
+            output["loc"] = [
+                "lat": loc.latitude,
+                "long": loc.longitude
+            ]
+        }
+
+        if let description = self.description {
+            output["description"] = description
+        }
+
+        return output
+    }
+
+    init?(fromDictionary dict: [String: Any]) {
+        guard let title = dict["title"] as? String,
+            let date = dict["date"] as? Date,
+            let creator = dict["creator"] as? String,
+            let venue = dict["venue"] as? String else {
+                return nil
+        }
+
+        self.title = title
+        self.date = date
+        self.creator = creator
+        self.venue = venue
     }
 
     init?(snapshot: DataSnapshot) {
-        guard let name = snapshot.childSnapshot(forPath: "name").value as? String,
-            let description = snapshot.childSnapshot(forPath: "description").value as? String,
+        guard let title = snapshot.childSnapshot(forPath: "title").value as? String,
             let dateString = snapshot.childSnapshot(forPath: "date").value as? String,
-            let playwright = snapshot.childSnapshot(forPath: "playwright").value as? String,
-            let theater = snapshot.childSnapshot(forPath: "theater").value as? String else {
+            let creator = snapshot.childSnapshot(forPath: "creator").value as? String,
+            let venue = snapshot.childSnapshot(forPath: "venue").value as? String else {
                 return nil
         }
 
         key = snapshot.key
-        self.name = name
-        self.description = description
-        self.theater = theater
-        self.playwright = playwright
+        self.title = title
+        self.venue = venue
+        self.creator = creator
 
-        if let date = dateFormatter.date(from: dateString) {
-            self.date = date
+        guard let date = dateFormatter.date(from: dateString) else {
+            return nil
         }
+
+        self.date = date
+
+        self.description = snapshot.childSnapshot(forPath: "description").value as? String
 
         if let lat = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "lat").value as? Double,
             let long = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "long").value as? Double {
