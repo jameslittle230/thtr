@@ -18,7 +18,7 @@
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */; };
 		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
-		1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */; };
+		1A3950282159B8A800D0BD7D /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* ActionBarView.swift */; };
 		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */; };
 		1A558E4D222C813A00D7B4B7 /* String+Slugify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */; };
@@ -55,7 +55,7 @@
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedViewController.swift; sourceTree = "<group>"; };
 		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
-		1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionView.swift; sourceTree = "<group>"; };
+		1A3950272159B8A800D0BD7D /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
 		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Slugify.swift"; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		1A3950262159B87100D0BD7D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1A3950272159B8A800D0BD7D /* FeedbackCollectionView.swift */,
+				1A3950272159B8A800D0BD7D /* ActionBarView.swift */,
 				1A0D318F2187D00900617BFA /* THLabel.swift */,
 			);
 			name = Views;
@@ -409,7 +409,7 @@
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
 				1AA413B2221207560078DA89 /* LaunchModalViewController.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
-				1A3950282159B8A800D0BD7D /* FeedbackCollectionView.swift in Sources */,
+				1A3950282159B8A800D0BD7D /* ActionBarView.swift in Sources */,
 				1A086D5A2224EAD700CC8451 /* ShowSelectionViewController.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
 				1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */,

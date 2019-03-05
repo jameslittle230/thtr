@@ -32,23 +32,28 @@ class FeedbackViewController: UIViewController {
         $0.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 
-    let collectionView = FeedbackCollectionView()
+    let actionBar = ActionBarView()
 
     var keyboardVisible = false
 
-    var model: Review? {
+    var model: Review {
         didSet {
             if !mainInput.hasText {
-                mainInput.text = model?.reviewText
+                mainInput.text = model.reviewText
             }
 
-            collectionView.model = model
+            actionBar.model = model
         }
     }
 
-    var reviewedShow: String?
-    var show: Show?
-
+    init(withReview review: Review) {
+        self.model = review
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,7 +62,7 @@ class FeedbackViewController: UIViewController {
 
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
-        stackView.addArrangedSubview(collectionView)
+        stackView.addArrangedSubview(actionBar)
         view.backgroundColor = Themer.DarkTheme.background
 
         if #available(iOS 11.0, *) {
@@ -73,20 +78,16 @@ class FeedbackViewController: UIViewController {
             // Fallback on earlier versions
         }
 
-        collectionView.parentViewController = self
+        actionBar.parentViewController = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
-
-        if model == nil {
-            model = Review(withShow: reviewedShow ?? "")
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        collectionView.reloadData()
+        actionBar.reloadData()
 
         if !keyboardVisible {
             mainInput.becomeFirstResponder()
@@ -123,7 +124,7 @@ class FeedbackViewController: UIViewController {
 
     @objc
     func saveCurrentModel() {
-        model?.reviewText = mainInput.text
-        model?.save()
+        model.reviewText = mainInput.text
+        model.save()
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     let cellHeight: CGFloat = 40
     let cellWidth: CGFloat = 40
@@ -22,8 +22,9 @@ class FeedbackCollectionView: UICollectionView, UICollectionViewDelegate, UIColl
     var model: Review?
 
     let cells: [ActionBarItem] = [
+        ActionBarItem(key: "show", image: UIImage(named: "star-filled"), color: UIColor(hex: "#c43636"), viewController: ShowSelectionViewController()),
         ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), color: UIColor(hex: "#eacd3e"), viewController: RatingViewController()),
-        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#3eea97"), viewController: PhotoViewController()),
+        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#50b9e2"), viewController: PhotoViewController()),
         ActionBarItem(key: "sliders", image: UIImage(named: "sliders"), color: UIColor(hex: "#f7893b"), viewController: SliderViewController())
     ]
 

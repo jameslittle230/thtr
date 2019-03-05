@@ -29,7 +29,7 @@ class Show {
             "title": title,
             "creator": creator,
             "date": dateFormatter.string(from: date),
-            "venue": venue,
+            "venue": venue
             ]
 
         if let loc = self.loc {
