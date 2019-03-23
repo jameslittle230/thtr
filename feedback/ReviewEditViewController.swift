@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedbackViewController: UIViewController {
+class ReviewEditViewController: UIViewController {
 
     let saveButton: UIBarButtonItem = create {
         $0.action = #selector(saveAndExitToRoot)
@@ -36,26 +36,13 @@ class FeedbackViewController: UIViewController {
 
     var keyboardVisible = false
 
-    var model: Review {
-        didSet {
-            if !mainInput.hasText {
-                mainInput.text = model.reviewText
-            }
-
-            actionBar.model = model
-        }
-    }
-
-    init(withReview review: Review) {
-        self.model = review
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let review = GlobalReviewCoordinator.getCurrentReview() else {
+            // alert
+            return
+        }
 
         navigationItem.title = "Write a Review"
         navigationItem.leftBarButtonItem = saveButton
@@ -63,20 +50,19 @@ class FeedbackViewController: UIViewController {
         view.addSubview(stackView)
         stackView.addArrangedSubview(mainInput)
         stackView.addArrangedSubview(actionBar)
+
+        mainInput.text = review.reviewText ?? ""
+
         view.backgroundColor = Themer.DarkTheme.background
 
-        if #available(iOS 11.0, *) {
-            innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
-            NSLayoutConstraint.activate([
-                stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                innerViewBottomConstraint
-                ])
-        } else {
-            // Fallback on earlier versions
-        }
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            innerViewBottomConstraint
+        ])
 
         actionBar.parentViewController = self
 
@@ -86,8 +72,6 @@ class FeedbackViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        actionBar.reloadData()
 
         if !keyboardVisible {
             mainInput.becomeFirstResponder()
@@ -124,7 +108,7 @@ class FeedbackViewController: UIViewController {
 
     @objc
     func saveCurrentModel() {
-        model.reviewText = mainInput.text
-        model.save()
+        GlobalReviewCoordinator.getCurrentReview()?.reviewText = mainInput.text
+        GlobalReviewCoordinator.getCurrentReview()?.save()
     }
 }

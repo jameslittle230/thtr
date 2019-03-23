@@ -28,7 +28,7 @@ class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionVie
         ActionBarItem(key: "sliders", image: UIImage(named: "sliders"), color: UIColor(hex: "#f7893b"), viewController: SliderViewController())
     ]
 
-    var parentViewController: FeedbackViewController?
+    var parentViewController: ReviewEditViewController?
 
     init() {
         super.init(frame: .zero, collectionViewLayout: flowLayout)
