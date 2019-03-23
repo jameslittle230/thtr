@@ -105,6 +105,8 @@ class ShowSelectionViewController: UITableViewController {
             }
 
             GlobalReviewCoordinator.getCurrentReview()?.show = showKey
+            GlobalReviewCoordinator.getCurrentReview()?.richShow = true
+
             navigationController?.pushViewController(ReviewEditViewController(), animated: true)
         case .createYourOwn:
             navigationController?.pushViewController(ShowCreationViewController(), animated: true)

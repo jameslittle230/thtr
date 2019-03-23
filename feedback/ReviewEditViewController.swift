@@ -52,6 +52,7 @@ class ReviewEditViewController: UIViewController {
         stackView.addArrangedSubview(actionBar)
 
         mainInput.text = review.reviewText ?? ""
+        actionBar.model = review
 
         view.backgroundColor = Themer.DarkTheme.background
 
@@ -70,8 +71,14 @@ class ReviewEditViewController: UIViewController {
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        actionBar.reloadData()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        actionBar.reloadData()
 
         if !keyboardVisible {
             mainInput.becomeFirstResponder()

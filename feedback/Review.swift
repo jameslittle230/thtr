@@ -22,7 +22,11 @@ class Review {
 
     var richShow = false
 
-    var extras: [String: Any] = [:]
+    var extras: [String: Any] = [:] {
+        didSet {
+            save()
+        }
+    }
 
     var dict: [String: Any] {
         var output: [String: Any] = [
@@ -36,6 +40,10 @@ class Review {
 
         if let show = self.show {
             output["show"] = show
+        }
+
+        if richShow != false {
+            output["richShow"] = true
         }
 
         // Keep old keys if there's a merge conflict
