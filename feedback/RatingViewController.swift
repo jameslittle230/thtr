@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingViewController: UIViewController, ActionBarViewController {
+class RatingViewController: UIViewController {
 
     let starImageViews = [
         UIImageView(),
@@ -25,8 +25,6 @@ class RatingViewController: UIViewController, ActionBarViewController {
         $0.backgroundColor = .blue
         $0.distribution = .fillEqually
     }
-
-    var model: Review?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +56,7 @@ class RatingViewController: UIViewController, ActionBarViewController {
             stackView.addArrangedSubview(imageView)
         }
 
-        if let rating = model?.extras["rating"] as? Int {
+        if let rating = GlobalReviewCoordinator.getCurrentReview()?.extras["rating"] as? Int {
             setControlValue(rating)
         }
 
@@ -73,7 +71,7 @@ class RatingViewController: UIViewController, ActionBarViewController {
             let normalizedXCoord = Int(recognizer.location(in: stackView).x / stackView.bounds.width * 5) + 1
             setControlValue(normalizedXCoord)
 
-            model?.extras["rating"] = normalizedXCoord
+            GlobalReviewCoordinator.getCurrentReview()?.extras["rating"] = normalizedXCoord
 
             // Add a little bit of a pause before popping the VC, just so users
             // can see what they've done

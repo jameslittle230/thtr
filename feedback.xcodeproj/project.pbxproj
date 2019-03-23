@@ -17,9 +17,9 @@
 		1A1A160F213870E5002EEE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A160E213870E5002EEE68 /* Assets.xcassets */; };
 		1A1A1612213870E5002EEE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1610213870E5002EEE68 /* LaunchScreen.storyboard */; };
 		1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */; };
-		1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */; };
+		1A1A161E2138BD03002EEE68 /* ReviewEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A161D2138BD03002EEE68 /* ReviewEditViewController.swift */; };
+		1A2775C82232EFE300D14310 /* GlobalReviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2775C72232EFE300D14310 /* GlobalReviewCoordinator.swift */; };
 		1A3950282159B8A800D0BD7D /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950272159B8A800D0BD7D /* ActionBarView.swift */; };
-		1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3950292159DF0100D0BD7D /* ExampleViewController.swift */; };
 		1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */; };
 		1A558E4D222C813A00D7B4B7 /* String+Slugify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */; };
 		1A5F069221EF9DF10081713A /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F069121EF9DF10081713A /* String+Truncate.swift */; };
@@ -54,9 +54,9 @@
 		1A1A1611213870E5002EEE68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A1A1613213870E5002EEE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFeedViewController.swift; sourceTree = "<group>"; };
-		1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		1A1A161D2138BD03002EEE68 /* ReviewEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEditViewController.swift; sourceTree = "<group>"; };
+		1A2775C72232EFE300D14310 /* GlobalReviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalReviewCoordinator.swift; sourceTree = "<group>"; };
 		1A3950272159B8A800D0BD7D /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
-		1A3950292159DF0100D0BD7D /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		1A4B850322091E6C00AE490A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Slugify.swift"; sourceTree = "<group>"; };
 		1A5F069121EF9DF10081713A /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 				1A3950262159B87100D0BD7D /* Views */,
 				1A830247216FCBC9001EEF7A /* Themer.swift */,
 				1AA413AF2212057B0078DA89 /* THNavigationController.swift */,
+				1A2775C72232EFE300D14310 /* GlobalReviewCoordinator.swift */,
 			);
 			path = feedback;
 			sourceTree = "<group>";
@@ -149,13 +150,12 @@
 		1A1A161921389311002EEE68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
-				1A3950292159DF0100D0BD7D /* ExampleViewController.swift */,
-				1A1A161D2138BD03002EEE68 /* FeedbackViewController.swift */,
-				1AA413B1221207560078DA89 /* LaunchModalViewController.swift */,
-				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
 				1AB165952150643B00F273E7 /* Account VCs */,
+				1AB16593214FF7FD00F273E7 /* AccountViewController.swift */,
 				1A0D31932188D11E00617BFA /* Action Bar VCs */,
+				1AA413B1221207560078DA89 /* LaunchModalViewController.swift */,
+				1A1A161D2138BD03002EEE68 /* ReviewEditViewController.swift */,
+				1A1A161B2138B12E002EEE68 /* ReviewFeedViewController.swift */,
 				1A086D582224EAC700CC8451 /* Show VCs */,
 			);
 			name = Controllers;
@@ -405,7 +405,6 @@
 				1A4B850422091E6C00AE490A /* PrivacyPolicyViewController.swift in Sources */,
 				1A086D5E2224EAFD00CC8451 /* ShowDescriptionViewController.swift in Sources */,
 				1A0D318E2187CD1000617BFA /* THTableViewCell.swift in Sources */,
-				1A39502A2159DF0100D0BD7D /* ExampleViewController.swift in Sources */,
 				1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */,
 				1AA413B2221207560078DA89 /* LaunchModalViewController.swift in Sources */,
 				1AB1659F2150850D00F273E7 /* Create.swift in Sources */,
@@ -420,6 +419,7 @@
 				1AEEEE56219E0D0D00FAB465 /* SliderViewController.swift in Sources */,
 				1A6786752163EF9C00E7A79C /* ReviewFeedCell.swift in Sources */,
 				1AEEEE54219E036E00FAB465 /* PhotoViewController.swift in Sources */,
+				1A2775C82232EFE300D14310 /* GlobalReviewCoordinator.swift in Sources */,
 				1A1A161C2138B12E002EEE68 /* ReviewFeedViewController.swift in Sources */,
 				1A558E4D222C813A00D7B4B7 /* String+Slugify.swift in Sources */,
 				1AD7B620221B36C000E7D041 /* Show.swift in Sources */,
@@ -427,7 +427,7 @@
 				1A830248216FCBC9001EEF7A /* Themer.swift in Sources */,
 				1A0D31922188D11B00617BFA /* RatingViewController.swift in Sources */,
 				1A086D5C2224EAE700CC8451 /* ShowCreationViewController.swift in Sources */,
-				1A1A161E2138BD03002EEE68 /* FeedbackViewController.swift in Sources */,
+				1A1A161E2138BD03002EEE68 /* ReviewEditViewController.swift in Sources */,
 				1AA413B02212057B0078DA89 /* THNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

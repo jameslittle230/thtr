@@ -8,9 +8,7 @@
 
 import UIKit
 
-class SliderViewController: UITableViewController, ActionBarViewController {
-
-    var model: Review?
+class SliderViewController: UITableViewController {
 
     var viewModels: [FeedbackDimension: FeedbackItemViewModel] = [
         .timeDistortion: FeedbackItemViewModel(type: .timeDistortion, value: 0),
@@ -28,7 +26,7 @@ class SliderViewController: UITableViewController, ActionBarViewController {
 
         navigationItem.title = "Distortion"
 
-        if let sliderVals = model?.extras["sliders"] as? Int {
+        if let sliderVals = GlobalReviewCoordinator.getCurrentReview()?.extras["sliders"] as? Int {
             viewModels[.timeDistortion]?.value = Float(sliderVals / 100) // 100s digit
             viewModels[.spaceDistortion]?.value = Float(sliderVals / 10 % 10) // 10s digit
             viewModels[.bodyDistortion]?.value = Float(sliderVals % 10) // 1s digit
@@ -46,7 +44,7 @@ class SliderViewController: UITableViewController, ActionBarViewController {
         let body = floor(viewModels[.bodyDistortion]?.value ?? 0)
 
         if (time + space + body) > 0 {
-            model?.extras["sliders"] = time + space + body
+            GlobalReviewCoordinator.getCurrentReview()?.extras["sliders"] = time + space + body
         }
 
         super.viewWillDisappear(animated)
@@ -111,14 +109,6 @@ class SliderViewController: UITableViewController, ActionBarViewController {
             return cell
         }
     }
-
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let label = THLabel()
-//        label.text = "Distortion Sliders"
-//        label.font = UIFont.preferredFont(forTextStyle: .headline)
-//        label.textAlignment = .center
-//        return label
-//    }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()

@@ -22,10 +22,32 @@ class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionVie
     var model: Review?
 
     let cells: [ActionBarItem] = [
-        ActionBarItem(key: "show", image: UIImage(named: "star-filled"), color: UIColor(hex: "#c43636"), viewController: ShowSelectionViewController()),
-        ActionBarItem(key: "rating", image: UIImage(named: "star-filled"), color: UIColor(hex: "#eacd3e"), viewController: RatingViewController()),
-        ActionBarItem(key: "photo", image: UIImage(named: "camera"), color: UIColor(hex: "#50b9e2"), viewController: PhotoViewController()),
-        ActionBarItem(key: "sliders", image: UIImage(named: "sliders"), color: UIColor(hex: "#f7893b"), viewController: SliderViewController())
+        ActionBarItem(
+            key: "show",
+            image: UIImage(named: "star-filled"),
+            label: THLabel(),
+            color: UIColor(hex: "#c43636"),
+            viewController: ShowSelectionViewController()),
+
+        ActionBarItem(
+            key: "rating",
+            image: UIImage(named: "star-filled"),
+            label: THLabel(),
+            color: UIColor(hex: "#eacd3e"),
+            viewController: RatingViewController()),
+
+        ActionBarItem(
+            key: "photo",
+            image: UIImage(named: "camera"),
+            label: THLabel(),
+            color: UIColor(hex: "#50b9e2"),
+            viewController: PhotoViewController()),
+        ActionBarItem(
+            key: "sliders",
+            image: UIImage(named: "sliders"),
+            label: THLabel(),
+            color: UIColor(hex: "#f7893b"),
+            viewController: SliderViewController())
     ]
 
     var parentViewController: ReviewEditViewController?
@@ -66,14 +88,8 @@ class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var item = cells[indexPath.row]
-        item.viewController.model = model
-
-        guard let actionItemVC = item.viewController as? UIViewController else {
-            return
-        }
-
-        parentViewController?.navigationController?.pushViewController(actionItemVC, animated: true)
+        let item = cells[indexPath.row]
+        parentViewController?.navigationController?.pushViewController(item.viewController, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -84,12 +100,9 @@ class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionVie
 struct ActionBarItem {
     let key: String
     let image: UIImage?
+    let label: THLabel?
     let color: UIColor
-    var viewController: ActionBarViewController
-}
-
-protocol ActionBarViewController {
-    var model: Review? { get set }
+    var viewController: UIViewController
 }
 
 class FeedbackCollectionViewCell: UICollectionViewCell {

@@ -41,6 +41,10 @@ class ReviewFeedViewController: UITableViewController {
         } else {
             loadData()
         }
+
+        if GlobalReviewCoordinator.getCurrentReview() != nil {
+            GlobalReviewCoordinator.unsetCurrentReview()
+        }
     }
 
     // MARK: - Table View Data Source

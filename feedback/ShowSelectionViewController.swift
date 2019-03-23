@@ -9,9 +9,7 @@
 import UIKit
 import Firebase
 
-class ShowSelectionViewController: UITableViewController, ActionBarViewController {
-    var model: Review?
-
+class ShowSelectionViewController: UITableViewController {
     enum Section: CaseIterable {
         case serverSideShows
         case createYourOwn
@@ -93,23 +91,19 @@ class ShowSelectionViewController: UITableViewController, ActionBarViewControlle
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
         switch Section.get(indexPath.section) {
         case .serverSideShows:
-            guard let showkey = shows[indexPath.row].key,
-                let review = model ?? Review(withShow: showkey) else {
-                    let alert = UIAlertController(title: "Internal error", message: "Couldn't select server-side show", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Bummer.", style: .default, handler: { _ in return }))
-                    self.present(alert, animated: true, completion: nil)
-                    return
+            guard let showKey = shows[indexPath.row].key else {
+                return
             }
 
-            let feedbackViewController = FeedbackViewController(withReview: review)
-            navigationController?.pushViewController(feedbackViewController, animated: true)
+            GlobalReviewCoordinator.getCurrentReview()?.show = showKey
+            navigationController?.pushViewController(ReviewEditViewController(), animated: true)
         case .createYourOwn:
-            let showCreationViewController = ShowCreationViewController()
-            navigationController?.pushViewController(showCreationViewController, animated: true)
+            navigationController?.pushViewController(ShowCreationViewController(), animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

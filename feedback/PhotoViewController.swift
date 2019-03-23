@@ -10,13 +10,11 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class PhotoViewController: UITableViewController, ActionBarViewController {
+class PhotoViewController: UITableViewController {
 
     let maxFileSizeInBytes: Int64 = 3 * 1024 * 1024
 
     let cellReuseId = "UITableViewCellReuseIdentifier"
-
-    var model: Review?
 
     let imageView: UIImageView = create {
         $0.image = nil
@@ -41,7 +39,7 @@ class PhotoViewController: UITableViewController, ActionBarViewController {
 
         navigationItem.title = "Add a Photo"
 
-        if let imagePath = model?.extras["photo"] as? String {
+        if let imagePath = GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] as? String {
             let storage = Storage.storage()
             let storageRef = storage.reference()
             let imageRef = storageRef.child(imagePath)
@@ -177,12 +175,12 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
         }
 
         uploadTask.observe(.success) { snapshot in
-            self.model?.extras["photo"] = snapshot.metadata?.path
+            GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] = snapshot.metadata?.path
         }
 
         uploadTask.observe(.failure) { snapshot in
             print("Failure")
-            if let error = snapshot.error as? NSError {
+            if let error = snapshot.error as NSError? {
                 switch StorageErrorCode(rawValue: error.code)! {
                 case .objectNotFound:
                     // File doesn't exist
