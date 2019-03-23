@@ -84,6 +84,9 @@ class ShowSelectionViewController: UITableViewController {
         switch Section.get(indexPath.section) {
         case .serverSideShows:
             cell.textLabel?.text = shows[indexPath.row].title
+
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressCell))
+            cell.addGestureRecognizer(longPressGesture)
         case .createYourOwn:
             cell.textLabel?.text = "Add your own"
         }
@@ -108,4 +111,18 @@ class ShowSelectionViewController: UITableViewController {
         }
     }
 
+    @objc
+    func didLongPressCell(_ sender: UIGestureRecognizer) {
+        if sender.state == .began {
+            let actionSheet = UIAlertController(
+                title: (sender as? UITableViewCell)?.textLabel?.text,
+                message: nil,
+                preferredStyle: .actionSheet)
+
+            actionSheet.addAction(UIAlertAction(title: "Edit Show", style: .default) { _ in return })
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return })
+
+            present(actionSheet, animated: true)
+        }
+    }
 }
