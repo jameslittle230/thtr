@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
     private static let allowedCharacters = NSCharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-")
-    
+
     public func slugify() -> String {
         let cocoaString = NSMutableString(string: self) as CFMutableString
         CFStringTransform(cocoaString, nil, kCFStringTransformToLatin, false)

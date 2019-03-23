@@ -42,6 +42,7 @@ class ShowSelectionViewController: UITableViewController {
                         continue
                 }
 
+                // @TODO Use firebase query here instead of appending each one :/
                 self.shows.append(show)
             }
         }
@@ -53,6 +54,7 @@ class ShowSelectionViewController: UITableViewController {
         tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(popThroughToGoBack))
+
         loadData()
     }
 

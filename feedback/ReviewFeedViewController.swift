@@ -12,6 +12,19 @@ import FirebaseDatabase
 
 class ReviewFeedViewController: UITableViewController {
 
+    enum Section: CaseIterable {
+        case create
+        case reviews
+
+        static var count: Int {
+            return self.allCases.count
+        }
+
+        static func get(_ section: Int) -> Section {
+            return self.allCases[section]
+        }
+    }
+
     let cellReuseIdentifier = "reuseIdentifier"
 
     var reviews: [Review] = []
@@ -26,6 +39,7 @@ class ReviewFeedViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Review Feed"
+
         tableView.register(ReviewFeedCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.separatorStyle = .none
 
@@ -51,7 +65,8 @@ class ReviewFeedViewController: UITableViewController {
 
     func loadData() {
         let dbRef = Database.database().reference(withPath: "reviews")
-        dbRef.queryOrdered(byChild: "updated") .observe(.value) { (multiSnapshot: DataSnapshot) -> Void in
+        dbRef.queryOrdered(byChild: "updated")
+            .observe(.value) { (multiSnapshot: DataSnapshot) -> Void in
                 self.reviews = []
 
                 for child in multiSnapshot.children {
@@ -74,14 +89,14 @@ class ReviewFeedViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return Section.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        switch Section.get(section) {
+        case .create:
             return 1
-        default:
+        case .reviews:
             return reviews.count
         }
     }
@@ -92,10 +107,10 @@ class ReviewFeedViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        switch indexPath.section {
-        case 0:
+        switch Section.get(indexPath.section) {
+        case .create:
             cell.configureAsNewReviewCell()
-        default:
+        case .reviews:
             cell.configureWithReview(reviews[indexPath.row])
 
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressCell))
@@ -126,8 +141,7 @@ class ReviewFeedViewController: UITableViewController {
 
     @objc
     func displayAccountViewController(sender: UIBarButtonItem?) {
-        let accountVC = AccountViewController()
-        let popoverRootVC = UINavigationController(rootViewController: accountVC)
+        let popoverRootVC = UINavigationController(rootViewController: AccountViewController())
         present(popoverRootVC, animated: true, completion: nil)
     }
 
@@ -142,9 +156,10 @@ class ReviewFeedViewController: UITableViewController {
                 return
             }
 
-            let actionSheet = UIAlertController(title: review.reviewText.truncate(length: 80),
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
+            let actionSheet = UIAlertController(
+                title: review.reviewText?.truncate(length: 80),
+                message: nil,
+                preferredStyle: .actionSheet)
 
             actionSheet.addAction(UIAlertAction(title: "Delete Review", style: .destructive) { _ in
                 review.delete()
