@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ReviewFeedCell: THTableViewCell {
 
@@ -16,7 +18,43 @@ class ReviewFeedCell: THTableViewCell {
     }
 
     var contentType: ContentType?
-    var review: Review?
+    var showString = "" {
+        didSet {
+            guard let review = review else {
+                return
+            }
+
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            let formattedDate = formatter.string(from: review.updated)
+
+            self.metaLabel.text = "\(showString) • \(formattedDate)"
+
+            if let rating = review.extras["rating"] as? Int {
+                self.metaLabel.text?.append(" • \(rating)★")
+            }
+
+        }
+    }
+
+    var review: Review? {
+        didSet {
+            guard let review = review else {
+                return
+            }
+
+            if review.richShow,
+                let show = review.show,
+                let title = ShowCollector.instance.shows[show]?.title {
+                    showString = title
+            } else if !review.richShow,
+                let show = review.show {
+                    showString = show
+            } else {
+                showString = "No Show"
+            }
+        }
+    }
 
     let insetContentView: UIView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -97,16 +135,6 @@ class ReviewFeedCell: THTableViewCell {
 
         contentLabel.text = review.reviewText
         contentLabel.font = UIFont.preferredFont(forTextStyle: .body)
-
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        let formattedDate = formatter.string(from: review.updated)
-
-        metaLabel.text = "\(review.show) • \(formattedDate)"
-
-        if let rating = review.extras["rating"] as? Int {
-            metaLabel.text?.append(" • \(rating)★")
-        }
 
         insetCVGradient.colors = [UIColor.init(hex: "#ad5389").cgColor, UIColor.init(hex: "#3c1053").cgColor]
 

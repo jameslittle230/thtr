@@ -96,9 +96,7 @@ class ShowCreationViewController: UITableViewController {
 
         if let model = Show(fromDictionary: dict) {
             model.save()
-            let feedbackViewController = FeedbackViewController()
-            feedbackViewController.show = model
-            navigationController?.pushViewController(feedbackViewController, animated: true)
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -224,6 +222,8 @@ class ShowCreationTableViewCell: THTableViewCell {
         print(datePicker.date)
         dateLabel.resignFirstResponder()
         viewModel?.value = .date(datePicker.date)
+        self.setUpConstraints()
+
     }
 
     required init?(coder aDecoder: NSCoder) {

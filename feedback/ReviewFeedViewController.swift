@@ -44,6 +44,8 @@ class ReviewFeedViewController: UITableViewController {
         tableView.separatorStyle = .none
 
         navigationItem.rightBarButtonItem = profileButton
+
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: ShowCollector.updateNotification, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +65,7 @@ class ReviewFeedViewController: UITableViewController {
 
     // MARK: - Table View Data Source
 
+    @objc
     func loadData() {
         let dbRef = Database.database().reference(withPath: "reviews")
         dbRef.queryOrdered(byChild: "updated")
@@ -125,13 +128,13 @@ class ReviewFeedViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if indexPath.section != 0 {
-            let feedbackViewController = FeedbackViewController()
-            feedbackViewController.model = reviews[indexPath.row]
-            navigationController?.pushViewController(feedbackViewController, animated: true)
-        } else {
-            let showSelectionVC = ShowSelectionViewController()
-            navigationController?.pushViewController(showSelectionVC, animated: true)
+        switch Section.get(indexPath.section) {
+        case .create:
+            GlobalReviewCoordinator.createNew()
+            navigationController?.pushViewController(ShowSelectionViewController(), animated: true)
+        case .reviews:
+            GlobalReviewCoordinator.setReview(reviews[indexPath.row])
+            navigationController?.pushViewController(ReviewEditViewController(), animated: true)
         }
     }
 

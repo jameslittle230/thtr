@@ -36,6 +36,8 @@
 		1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659C215084E200F273E7 /* SignUpViewController.swift */; };
 		1AB1659F2150850D00F273E7 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659E2150850D00F273E7 /* Create.swift */; };
 		1AD7B620221B36C000E7D041 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7B61F221B36C000E7D041 /* Show.swift */; };
+		1AE20E5D2245C6E200EEEC4F /* ReviewCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE20E5B2245C6E100EEEC4F /* ReviewCollector.swift */; };
+		1AE20E5E2245C6E200EEEC4F /* ShowCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE20E5C2245C6E200EEEC4F /* ShowCollector.swift */; };
 		1AEEEE54219E036E00FAB465 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEE53219E036E00FAB465 /* PhotoViewController.swift */; };
 		1AEEEE56219E0D0D00FAB465 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEE55219E0D0D00FAB465 /* SliderViewController.swift */; };
 		CFECFBD2B16A189ADF22B39B /* Pods_feedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */; };
@@ -73,6 +75,8 @@
 		1AB1659C215084E200F273E7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1AB1659E2150850D00F273E7 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		1AD7B61F221B36C000E7D041 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		1AE20E5B2245C6E100EEEC4F /* ReviewCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCollector.swift; sourceTree = "<group>"; };
+		1AE20E5C2245C6E200EEEC4F /* ShowCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCollector.swift; sourceTree = "<group>"; };
 		1AEEEE53219E036E00FAB465 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		1AEEEE55219E0D0D00FAB465 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		6E18C36C78DED3468F7B5481 /* Pods_feedback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +199,8 @@
 			children = (
 				1A6786762163EFB700E7A79C /* Review.swift */,
 				1AD7B61F221B36C000E7D041 /* Show.swift */,
+				1AE20E5B2245C6E100EEEC4F /* ReviewCollector.swift */,
+				1AE20E5C2245C6E200EEEC4F /* ShowCollector.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -411,9 +417,11 @@
 				1A3950282159B8A800D0BD7D /* ActionBarView.swift in Sources */,
 				1A086D5A2224EAD700CC8451 /* ShowSelectionViewController.swift in Sources */,
 				1AB16594214FF7FD00F273E7 /* AccountViewController.swift in Sources */,
+				1AE20E5E2245C6E200EEEC4F /* ShowCollector.swift in Sources */,
 				1AB165972150649E00F273E7 /* LogInViewController.swift in Sources */,
 				1A830246216FC3D5001EEF7A /* UIColor+Hex.swift in Sources */,
 				1A1A1608213870E3002EEE68 /* AppDelegate.swift in Sources */,
+				1AE20E5D2245C6E200EEEC4F /* ReviewCollector.swift in Sources */,
 				1A6786772163EFB700E7A79C /* Review.swift in Sources */,
 				1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */,
 				1AEEEE56219E0D0D00FAB465 /* SliderViewController.swift in Sources */,

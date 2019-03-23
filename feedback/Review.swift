@@ -15,21 +15,28 @@ class Review {
     var key: String?
 
     let userEmail: String
-    var reviewText: String
-    var show: String
     var updated: Date
 
-    var extras: [String: Any] = [:]
+    var reviewText: String?
+    var show: String?
 
-    var loadedDict: [String: Any]?
+    var richShow = false
+
+    var extras: [String: Any] = [:]
 
     var dict: [String: Any] {
         var output: [String: Any] = [
             "user": userEmail,
-            "text": reviewText,
-            "show": show,
             "updated": updated.timeIntervalSince1970
         ]
+
+        if let reviewText = self.reviewText {
+            output["text"] = reviewText
+        }
+
+        if let show = self.show {
+            output["show"] = show
+        }
 
         // Keep old keys if there's a merge conflict
         output.merge(extras) { (current, _) in current }
@@ -51,17 +58,16 @@ class Review {
         self.show = show
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
 
-        self.loadedDict = snapshot.value as? [String: Any]
-        self.extras = self.loadedDict?.filter { key, _ in
-            if ["user", "text", "show", "updated"].contains(key) {
-                return false
-            }
+        if let richShow = snapshot.childSnapshot(forPath: "richShow").value as? Bool {
+            self.richShow = richShow
+        }
 
-            return true
+        self.extras = (snapshot.value as? [String: Any])?.filter { key, _ in
+            return !["user", "text", "show", "updated"].contains(key)
         } ?? [:]
     }
 
-    init?(withShow show: String) {
+    init?() {
         guard let email = Auth.auth().currentUser?.email else {
             return nil
         }
@@ -69,7 +75,6 @@ class Review {
         key = nil
         reviewText = ""
         userEmail = email
-        self.show = show
         updated = Date()
     }
 

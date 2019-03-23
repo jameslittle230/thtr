@@ -10,6 +10,11 @@ import UIKit
 
 class THNavigationController: UINavigationController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ShowCollector.startListener()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
