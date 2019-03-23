@@ -115,9 +115,11 @@ class ShowSelectionViewController: UITableViewController {
 
     @objc
     func didLongPressCell(_ sender: UIGestureRecognizer) {
+        let cell = sender.view as? UITableViewCell
+
         if sender.state == .began {
             let actionSheet = UIAlertController(
-                title: (sender as? UITableViewCell)?.textLabel?.text,
+                title: cell?.textLabel?.text ?? "Show Details",
                 message: nil,
                 preferredStyle: .actionSheet)
 
