@@ -24,7 +24,14 @@ class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionVie
             key: "show",
             image: UIImage(named: "tickets"),
             color: UIColor(hex: "#50b9e2"),
-            viewController: ShowSelectionViewController()),
+            viewController: {
+                if let showString = GlobalReviewCoordinator.getCurrentReview()?.show,
+                    let show = ShowCollector.instance.shows[showString] {
+                        return ShowDescriptionViewController(withShow: show)
+                } else {
+                    return ShowSelectionViewController()
+                }
+            }()),
 
         ActionBarItem(
             key: "rating",

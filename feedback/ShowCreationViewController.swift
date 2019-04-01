@@ -11,17 +11,24 @@ import Firebase
 
 class ShowCreationViewController: UITableViewController {
 
-    enum CellType {
-        case field(ShowCreationLineItemViewModel)
-        case confirm
+    enum Section: CaseIterable {
+        case fields
+        case submit
+
+        static var count: Int {
+            return self.allCases.count
+        }
+
+        static func get(_ section: Int) -> Section {
+            return self.allCases[section]
+        }
     }
 
-    let cells: [CellType] = [
-        .field(ShowCreationLineItemViewModel(key: "title", userVisibleKey: "Title", value: .text(""))),
-        .field(ShowCreationLineItemViewModel(key: "date", userVisibleKey: "Date", value: .date(Date()))),
-        .field(ShowCreationLineItemViewModel(key: "creator", userVisibleKey: "Creator", value: .text(""))),
-        .field(ShowCreationLineItemViewModel(key: "venue", userVisibleKey: "Venue", value: .text(""))),
-        .confirm
+    let cells: [ShowCreationLineItemViewModel] = [
+        ShowCreationLineItemViewModel(key: "title", userVisibleKey: "Title", value: .text("")),
+        ShowCreationLineItemViewModel(key: "date", userVisibleKey: "Date", value: .date(Date())),
+        ShowCreationLineItemViewModel(key: "creator", userVisibleKey: "Creator", value: .text("")),
+        ShowCreationLineItemViewModel(key: "venue", userVisibleKey: "Venue", value: .text(""))
     ]
 
     let submitButton: UIButton = create {
@@ -40,24 +47,29 @@ class ShowCreationViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
+        switch Section.get(section) {
+        case .fields:
+            return cells.count
+        case .submit:
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch cells[indexPath.row] {
+        switch Section.get(indexPath.section) {
 
-        case let .field(viewModel):
+        case .fields:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "showCreationCellReuseIdentifier", for: indexPath) as? ShowCreationTableViewCell else {
                 return UITableViewCell()
             }
-            cell.viewModel = viewModel
+            cell.viewModel = cells[indexPath.row]
             return cell
 
-        case .confirm:
+        case .submit:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? THTableViewCell else {
                 return UITableViewCell()
             }
@@ -83,15 +95,13 @@ class ShowCreationViewController: UITableViewController {
     func submitForm() {
         self.view.endEditing(true)
         var dict: [String: Any] = [:]
-        for cell in cells {
-            if case let CellType.field(viewModel) = cell {
-                let value = viewModel.getValue()
-                if value as? String == "" {
-                    // alert and return
-                }
-
-                dict[viewModel.key] = viewModel.getValue()
+        for viewModel in cells {
+            let value = viewModel.getValue()
+            if value as? String == "" {
+                // alert and return
             }
+
+            dict[viewModel.key] = viewModel.getValue()
         }
 
         if let model = Show(fromDictionary: dict) {
