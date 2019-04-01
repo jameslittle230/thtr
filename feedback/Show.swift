@@ -13,35 +13,27 @@ import MapKit
 class Show {
     var key: String?
 
+    var creatingUser: String
+    var updated: Date
+    var created: Date
+
     var title: String
     var creator: String
     var venue: String
     var date: Date
 
-    var description: String?
-    var loc: CLLocationCoordinate2D?
-    var created: Date?
-
     let dateFormatter = ISO8601DateFormatter()
 
     var dict: [String: Any] {
-        var output: [String: Any] = [
+        let output: [String: Any] = [
             "title": title,
             "creator": creator,
             "date": dateFormatter.string(from: date),
-            "venue": venue
+            "venue": venue,
+            "creatingUser": creatingUser,
+            "updated": updated.timeIntervalSince1970,
+            "created": created.timeIntervalSince1970
             ]
-
-        if let loc = self.loc {
-            output["loc"] = [
-                "lat": loc.latitude,
-                "long": loc.longitude
-            ]
-        }
-
-        if let description = self.description {
-            output["description"] = description
-        }
 
         return output
     }
@@ -58,6 +50,10 @@ class Show {
         self.date = date
         self.creator = creator
         self.venue = venue
+
+        self.creatingUser = Auth.auth().currentUser?.email ?? ""
+        self.created = Date()
+        self.updated = Date()
     }
 
     init?(snapshot: DataSnapshot) {
@@ -79,16 +75,34 @@ class Show {
 
         self.date = date
 
-        self.description = snapshot.childSnapshot(forPath: "description").value as? String
-
-        if let lat = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "lat").value as? Double,
-            let long = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "long").value as? Double {
-                loc = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        if let creatingUser = snapshot.childSnapshot(forPath: "creatingUser").value as? String {
+            self.creatingUser = creatingUser
+        } else {
+            self.creatingUser = Auth.auth().currentUser?.email ?? ""
         }
+
+        if let updated = snapshot.childSnapshot(forPath: "updated").value as? Double {
+            self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        } else {
+            self.updated = Date()
+        }
+
+        if let created = snapshot.childSnapshot(forPath: "created").value as? Double {
+            self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        } else {
+            self.created = self.updated
+        }
+
+//        self.description = snapshot.childSnapshot(forPath: "description").value as? String
+
+//        if let lat = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "lat").value as? Double,
+//            let long = snapshot.childSnapshot(forPath: "loc").childSnapshot(forPath: "long").value as? Double {
+//                loc = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//        }
     }
 
     func save() {
-        created = Date()
+        updated = Date()
         let dbRef = Database.database().reference(withPath: "rich_shows")
         if let key = key {
             // update record

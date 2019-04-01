@@ -16,6 +16,7 @@ class Review {
 
     let userEmail: String
     var updated: Date
+    let created: Date
 
     var reviewText: String?
     var show: String?
@@ -31,7 +32,8 @@ class Review {
     var dict: [String: Any] {
         var output: [String: Any] = [
             "user": userEmail,
-            "updated": updated.timeIntervalSince1970
+            "updated": updated.timeIntervalSince1970,
+            "created": created.timeIntervalSince1970
         ]
 
         if let reviewText = self.reviewText {
@@ -65,6 +67,11 @@ class Review {
         reviewText = text
         self.show = show
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        if let created = snapshot.childSnapshot(forPath: "created").value as? Double {
+            self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        } else {
+            self.created = self.updated
+        }
 
         if let richShow = snapshot.childSnapshot(forPath: "richShow").value as? Bool {
             self.richShow = richShow
@@ -84,6 +91,7 @@ class Review {
         reviewText = ""
         userEmail = email
         updated = Date()
+        created = Date()
     }
 
     func save() {
