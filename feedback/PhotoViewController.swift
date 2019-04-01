@@ -169,17 +169,22 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
 
         let imagesRef = storageRef.child("reviewImages")
 
-        guard var data = image.jpegData(compressionQuality: 0.4) else {
+        var compression: CGFloat = 0.8
+
+        guard var data = image.jpegData(compressionQuality: compression) else {
             return
         }
 
-        if data.count > maxFileSizeInBytes {
-            guard let smallerData = image.jpegData(compressionQuality: 0.2) else {
+        while data.count > maxFileSizeInBytes {
+            compression *= 0.75
+            guard let smallerData = image.jpegData(compressionQuality: compression) else {
                 return
             }
 
             data = smallerData // There should maybe be a better way of checking this but oh well
         }
+
+        print("Compression quality chosen: \(compression)")
 
         let filePath = "\(Auth.auth().currentUser!.uid)/\(Date().timeIntervalSince1970)"
 
@@ -189,12 +194,12 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
         let uploadTask = imagesRef.child(filePath).putData(data, metadata: metadata)
 
         uploadTask.observe(.progress) { snapshot in
-            // Upload reported progress
             let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            print(percentComplete)
+            print("\(percentComplete)% uploaded")
         }
 
         uploadTask.observe(.success) { snapshot in
+            print("File upload completed")
             GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] = snapshot.metadata?.path
         }
 
