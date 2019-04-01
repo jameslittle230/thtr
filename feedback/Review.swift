@@ -97,6 +97,7 @@ class Review {
             // new ref
             let newRef = dbRef.childByAutoId()
             newRef.setValue(self.dict)
+            key = newRef.key
         }
     }
 
