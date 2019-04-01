@@ -68,7 +68,7 @@ class PhotoViewController: UITableViewController {
         case 0:
             return self.imageVisible ? 1 : 0
         case 1:
-            return 2
+            return self.imageVisible ? 3 : 2
         default:
             fatalError()
         }
@@ -95,6 +95,8 @@ class PhotoViewController: UITableViewController {
                 cell.textLabel?.text = "Take a Picture"
             case 1:
                 cell.textLabel?.text = "Select a Picture"
+            case 2:
+                cell.textLabel?.text = "Remove Picture"
             default:
                 fatalError()
             }
@@ -106,6 +108,8 @@ class PhotoViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
         guard indexPath.section == 1 else {
             return
         }
@@ -113,15 +117,31 @@ class PhotoViewController: UITableViewController {
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self
 
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 myPickerController.sourceType = .camera
                 present(myPickerController, animated: true, completion: nil)
             }
-        } else {
+        case 1:
             myPickerController.sourceType = .photoLibrary
             present(myPickerController, animated: true, completion: nil)
+        case 2:
+            GlobalReviewCoordinator.getCurrentReview()?.extras.removeValue(forKey: "photo")
+            imageVisible = false
+            imageView.image = nil
+            tableView.reloadData()
+        default:
+            return
         }
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
 }
 
