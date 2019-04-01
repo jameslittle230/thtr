@@ -11,13 +11,12 @@ import UIKit
 class ActionBarView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     let cellHeight: CGFloat = 40
-    let cellWidth: CGFloat = 40
 
     let cellIdentifier = "UICollectionViewCellReuseIdentifier"
 
     let flowLayout: UICollectionViewFlowLayout = create {
         $0.scrollDirection = .horizontal
-        $0.estimatedItemSize = CGSize(width: 40, height: 40)
+        $0.estimatedItemSize = CGSize(width: 20, height: 20)
     }
 
     var cells: [ActionBarItem] = [
@@ -131,22 +130,18 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
-        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 
     let label: THLabel = create {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .white
         $0.textAlignment = .center
         $0.font = UIFont.preferredFont(forTextStyle: .caption1)
-        $0.text = "Test"
     }
 
     let stackView: UIStackView = create {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
-        $0.spacing = 4
+        $0.spacing = 6
     }
 
     var model: ActionBarItem? {
@@ -158,16 +153,15 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.addSubview(stackView)
+        addSubview(stackView)
+
+        let dimension: CGFloat = 28
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: dimension),
+            imageView.widthAnchor.constraint(equalToConstant: dimension)
+        ])
 
         stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(label)
-
-        imageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-
-        let newWidthFromAspect = (imageView.image?.size.width ?? 1) / (imageView.image?.size.height ?? 1) * 28
-        imageView.widthAnchor.constraint(equalToConstant: newWidthFromAspect).isActive = true
-
         stackView.anchorToSuperviewAnchors(withHorizontalInset: 4, andVerticalInset: 6)
     }
 
@@ -189,13 +183,20 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
             case .inactive:
                 break
             case .dot:
-                self.backgroundColor = UIColor(hex: "#ea4f3e", alpha: 0.7)
+                self.backgroundColor = UIColor(hex: "#ea4f3e", alpha: 0.3)
                 self.layer.cornerRadius = 8
             case let .text(value: value):
                 stackView.addArrangedSubview(label)
                 label.text = value
                 label.textColor = model.color
             }
+
+            print(imageView.intrinsicContentSize)
+            print(label.intrinsicContentSize)
+            stackView.layoutIfNeeded()
+            print(stackView.frame)
+            print(stackView.intrinsicContentSize)
+            print(self.intrinsicContentSize)
         }
     }
 }
