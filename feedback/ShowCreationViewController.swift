@@ -173,7 +173,8 @@ class ShowCreationTableViewCell: THTableViewCell {
 
         dateLabel.inputView = datePicker
 
-        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(datePickerDone))
+        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(datePickerDidEndEditing))
+        datePicker.addTarget(self, action: #selector(datePickerDidEndEditing), for: .valueChanged)
         datePickerToolbar.setItems([doneButtonItem], animated: false)
         dateLabel.inputAccessoryView = datePickerToolbar
 
@@ -218,7 +219,7 @@ class ShowCreationTableViewCell: THTableViewCell {
     }
 
     @objc
-    func datePickerDone() {
+    func datePickerDidEndEditing() {
         print(datePicker.date)
         dateLabel.resignFirstResponder()
         viewModel?.value = .date(datePicker.date)
