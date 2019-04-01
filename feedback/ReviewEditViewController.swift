@@ -99,12 +99,8 @@ class ReviewEditViewController: UIViewController {
         }
 
         innerViewBottomConstraint.isActive = false
-        innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -kbSize.height)
+        innerViewBottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(kbSize.height + 4))
         innerViewBottomConstraint.isActive = true
-
-        UIView.animate(withDuration: 1.0, animations: {
-            self.view.layoutIfNeeded()
-        })
     }
 
     @objc
