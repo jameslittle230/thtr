@@ -19,6 +19,7 @@ class Themer {
 
     class func configure() {
         UITableView.appearance().backgroundColor = Themer.DarkTheme.background
+        UICollectionView.appearance().backgroundColor = Themer.DarkTheme.background
         THTableViewCell.appearance().backgroundColor = Themer.DarkTheme.background
 
         UINavigationBar.appearance().barStyle = .blackOpaque

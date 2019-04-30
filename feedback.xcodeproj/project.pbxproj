@@ -35,6 +35,7 @@
 		1AB1659A2150675300F273E7 /* UIKit+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB165992150675300F273E7 /* UIKit+Autolayout.swift */; };
 		1AB1659D215084E200F273E7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659C215084E200F273E7 /* SignUpViewController.swift */; };
 		1AB1659F2150850D00F273E7 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1659E2150850D00F273E7 /* Create.swift */; };
+		1AB91B6B2277F518009F253A /* Number+Formattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB91B6A2277F518009F253A /* Number+Formattable.swift */; };
 		1AD7B620221B36C000E7D041 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7B61F221B36C000E7D041 /* Show.swift */; };
 		1AE20E5D2245C6E200EEEC4F /* ReviewCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE20E5B2245C6E100EEEC4F /* ReviewCollector.swift */; };
 		1AE20E5E2245C6E200EEEC4F /* ShowCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE20E5C2245C6E200EEEC4F /* ShowCollector.swift */; };
@@ -74,6 +75,7 @@
 		1AB165992150675300F273E7 /* UIKit+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Autolayout.swift"; sourceTree = "<group>"; };
 		1AB1659C215084E200F273E7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1AB1659E2150850D00F273E7 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		1AB91B6A2277F518009F253A /* Number+Formattable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Formattable.swift"; sourceTree = "<group>"; };
 		1AD7B61F221B36C000E7D041 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		1AE20E5B2245C6E100EEEC4F /* ReviewCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCollector.swift; sourceTree = "<group>"; };
 		1AE20E5C2245C6E200EEEC4F /* ShowCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCollector.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				1A830245216FC3D5001EEF7A /* UIColor+Hex.swift */,
 				1A5F069121EF9DF10081713A /* String+Truncate.swift */,
 				1A558E4C222C813A00D7B4B7 /* String+Slugify.swift */,
+				1AB91B6A2277F518009F253A /* Number+Formattable.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				1A086D5C2224EAE700CC8451 /* ShowCreationViewController.swift in Sources */,
 				1A1A161E2138BD03002EEE68 /* ReviewEditViewController.swift in Sources */,
 				1AA413B02212057B0078DA89 /* THNavigationController.swift in Sources */,
+				1AB91B6B2277F518009F253A /* Number+Formattable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

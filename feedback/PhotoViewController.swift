@@ -10,138 +10,157 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class PhotoViewController: UITableViewController {
+class PhotoViewController: UICollectionViewController {
 
-    let maxFileSizeInBytes: Int64 = 3 * 1024 * 1024
+    private let sectionInsets = UIEdgeInsets(top: 32,
+                                             left: 20.0,
+                                             bottom: 0,
+                                             right: 20.0)
 
-    let cellReuseId = "UITableViewCellReuseIdentifier"
+    private var itemsPerRow: CGFloat = 2
 
-    let imageView: UIImageView = create {
-        $0.image = nil
-        $0.contentMode = .scaleAspectFit
-        $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    enum Section: CaseIterable {
+        case photoList
+        case actions
 
-    var imageVisible = false {
-        didSet {
-            tableView.reloadData()
+        static var count: Int {
+            return self.allCases.count
+        }
+
+        static func get(_ section: Int) -> Section {
+            return self.allCases[section]
         }
     }
+
+    static let maxFileSizeInBytes: Int64 = 3 * 1024 * 1024
+
+    let THPhotoActionCellReuseId = "THPhotoActionCellReuseIdentifier"
+    let THPhotoViewCellReuseId = "THPhotoViewCellReuseIdentifier"
+
+    var photoPaths: [String] = ["test"]
+
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+
+    required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(THTableViewCell.self, forCellReuseIdentifier: cellReuseId)
-
-        tableView.estimatedRowHeight = 85.0
-        tableView.rowHeight = UITableView.automaticDimension
+        collectionView.register(THPhotoActionCell.self, forCellWithReuseIdentifier: THPhotoActionCellReuseId)
+        collectionView.register(THPhotoViewCell.self, forCellWithReuseIdentifier: THPhotoViewCellReuseId)
 
         navigationItem.title = "Add a Photo"
 
-        if let imagePath = GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] as? String {
-            let storage = Storage.storage()
-            let storageRef = storage.reference()
-            let imageRef = storageRef.child(imagePath)
+        getNewDataAndReload()
+    }
 
-            imageRef.getData(maxSize: maxFileSizeInBytes) { data, error in
-                if let error = error {
-                    print(error)
-                    Analytics.logEvent("image_download_error", parameters: nil)
-                } else {
-                    self.imageView.image = UIImage(data: data!)
-                    self.imageVisible = true
-                }
-            }
+    func getNewDataAndReload() {
+        let photoValue = GlobalReviewCoordinator.getCurrentReview()?.extras["photo"]
+
+        if let imagePath = photoValue as? String {
+            self.photoPaths = [imagePath]
+        } else if let imagePathDict = photoValue as? [String: String] {
+            self.photoPaths = Array(imagePathDict.values)
         }
+
+        collectionView.reloadData()
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return Section.count
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch section {
-        case 0:
-            return self.imageVisible ? 1 : 0
-        case 1:
-            return self.imageVisible ? 3 : 2
-        default:
-            fatalError()
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch Section.get(section) {
+        case .photoList:
+            return photoPaths.count
+        case .actions:
+            return 2
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId) ?? THTableViewCell(frame: .zero)
-
-        switch indexPath.section {
-        case 0:
-            if self.imageVisible {
-                cell.contentView.addSubview(imageView)
-                let aspect = (imageView.image?.size.width ?? 1) / (imageView.image?.size.height ?? 1)
-
-                NSLayoutConstraint.activate([
-                    imageView.widthAnchor.constraint(equalTo: cell.widthAnchor),
-                    imageView.heightAnchor.constraint(equalToConstant: cell.bounds.width / aspect),
-                    cell.contentView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
-                    ])
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch Section.get(indexPath.section) {
+        case .photoList:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: THPhotoViewCellReuseId, for: indexPath) as? THPhotoViewCell else {
+                return UICollectionViewCell()
             }
-        case 1:
+
+            cell.imagePath = photoPaths[indexPath.row]
+            return cell
+        case .actions:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: THPhotoActionCellReuseId, for: indexPath) as? THPhotoActionCell else {
+                return UICollectionViewCell()
+            }
+
             switch indexPath.row {
             case 0:
-                cell.textLabel?.text = "Take a Picture"
+                cell.label.text = "Take Photo"
             case 1:
-                cell.textLabel?.text = "Select a Picture"
-            case 2:
-                cell.textLabel?.text = "Remove Picture"
+                cell.label.text = "Select Photo"
             default:
                 fatalError()
             }
-        default:
-            fatalError()
+            return cell
         }
-
-        return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch Section.get(indexPath.section) {
+        case .photoList:
+            break
+//            navigationController?.pushViewController(BigPhotoViewController(photoPaths[indexPath.row]), animated: true)
+        case .actions:
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self
 
-        guard indexPath.section == 1 else {
-            return
-        }
-
-        let myPickerController = UIImagePickerController()
-        myPickerController.delegate = self
-
-        switch indexPath.row {
-        case 0:
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                myPickerController.sourceType = .camera
+            switch indexPath.row {
+            case 0:
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    myPickerController.sourceType = .camera
+                    present(myPickerController, animated: true, completion: nil)
+                }
+            case 1:
+                myPickerController.sourceType = .photoLibrary
                 present(myPickerController, animated: true, completion: nil)
+            default:
+                fatalError()
             }
-        case 1:
-            myPickerController.sourceType = .photoLibrary
-            present(myPickerController, animated: true, completion: nil)
-        case 2:
-            GlobalReviewCoordinator.getCurrentReview()?.extras.removeValue(forKey: "photo")
-            imageVisible = false
-            imageView.image = nil
-            tableView.reloadData()
-        default:
-            return
+        }
+    }
+}
+
+extension PhotoViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+
+        switch Section.get(indexPath.section) {
+        case .photoList:
+            return CGSize(width: widthPerItem, height: widthPerItem)
+        case .actions:
+            return CGSize(width: widthPerItem, height: 80)
         }
     }
 
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
     }
 
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
 }
 
@@ -153,9 +172,6 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {
             saveImage(image)
-            imageView.image = image
-            imageVisible = true
-            self.tableView.reloadData()
         } else {
             print("Something went wrong")
         }
@@ -175,7 +191,7 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
             return
         }
 
-        while data.count > maxFileSizeInBytes {
+        while data.count > PhotoViewController.maxFileSizeInBytes {
             compression *= 0.75
             guard let smallerData = image.jpegData(compressionQuality: compression) else {
                 return
@@ -186,7 +202,8 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
 
         print("Compression quality chosen: \(compression)")
 
-        let filePath = "\(Auth.auth().currentUser!.uid)/\(Date().timeIntervalSince1970)"
+        let fileKey = "\(Date().timeIntervalSince1970)".components(separatedBy: ".")[0]
+        let filePath = "\(Auth.auth().currentUser!.uid)/\(fileKey)"
 
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
@@ -195,12 +212,26 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
 
         uploadTask.observe(.progress) { snapshot in
             let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            print("\(percentComplete)% uploaded")
+            let percentString = percentComplete.format(pattern: "%.2f")
+            self.navigationItem.title = "\(percentString)% uploaded"
         }
 
         uploadTask.observe(.success) { snapshot in
-            print("File upload completed")
-            GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] = snapshot.metadata?.path
+            self.navigationItem.title = "File upload completed"
+
+            let photoValue = GlobalReviewCoordinator.getCurrentReview()?.extras["photo"]
+            var outputPhotoValue: [String: String] = [:]
+
+            if let imagePath = photoValue as? String {
+                let pathKey = imagePath.components(separatedBy: ".")[0]
+                outputPhotoValue = [pathKey: imagePath]
+            } else if let imagePathDict = photoValue as? [String: String] {
+                outputPhotoValue = imagePathDict
+            }
+
+            outputPhotoValue[fileKey] = snapshot.metadata?.path
+            GlobalReviewCoordinator.getCurrentReview()?.extras["photo"] = outputPhotoValue
+            self.getNewDataAndReload()
         }
 
         uploadTask.observe(.failure) { snapshot in
@@ -229,4 +260,56 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
             }
         }
     }
+}
+
+class THPhotoViewCell: UICollectionViewCell {
+    let imageView: UIImageView = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let storage = Storage.storage()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        contentView.addSubview(imageView)
+        imageView.anchorToSuperviewAnchors()
+    }
+
+    required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
+
+    var imagePath: String? {
+        didSet {
+            let storageRef = storage.reference()
+            guard let path = imagePath else { return }
+            let imageRef = storageRef.child(path)
+
+            imageRef.getData(maxSize: PhotoViewController.maxFileSizeInBytes) { data, error in
+                if let error = error {
+                    print(error)
+                    Analytics.logEvent("image_download_error", parameters: nil)
+                } else {
+                    self.imageView.image = UIImage(data: data!)
+                }
+            }
+        }
+    }
+}
+
+class THPhotoActionCell: UICollectionViewCell {
+    let label: UILabel = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textAlignment = .center
+        $0.textColor = Themer.DarkTheme.text
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = Themer.DarkTheme.backgroundHighlighted
+        layer.cornerRadius = 8
+        contentView.addSubview(label)
+        label.anchorToSuperviewAnchors()
+    }
+
+    required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
 }
