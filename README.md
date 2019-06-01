@@ -1,3 +1,7 @@
+### ⚠️ I graduated! I'm not working on this anymore.
+
+---
+
 # THTR: Theater Diary
 
 An iOS App to track and review theater shows.
